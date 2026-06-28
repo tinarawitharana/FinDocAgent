@@ -1,0 +1,409 @@
+{
+  "dataset": "DocVQA (nielsr/docvqa_1200_examples)",
+  "num_samples": 50,
+  "qwen_vl_max_anls": 0.847,
+  "reference_layoutlmv3": 0.834,
+  "reference_qwen2vl_7b": 0.945,
+  "per_question_results": [
+    {
+      "id": 0,
+      "question": "what is the date mentioned in this letter?",
+      "ground_truth": "1/8/93",
+      "prediction": "1/8/93",
+      "anls": 1.0,
+      "time_seconds": 2.66
+    },
+    {
+      "id": 1,
+      "question": "Who is in  cc in this letter?",
+      "ground_truth": "T.F. Riehl",
+      "prediction": "T.F. Riehl",
+      "anls": 1.0,
+      "time_seconds": 0.94
+    },
+    {
+      "id": 2,
+      "question": "what is the subject of  this letter?",
+      "ground_truth": "Review of existing Brainstorming Ideas/483",
+      "prediction": "Review of Existing Brainstorming Ideas/483",
+      "anls": 1.0,
+      "time_seconds": 1.54
+    },
+    {
+      "id": 3,
+      "question": "What is the number at the bottom of the page, in bold?",
+      "ground_truth": "499150498",
+      "prediction": "499150498",
+      "anls": 1.0,
+      "time_seconds": 0.81
+    },
+    {
+      "id": 4,
+      "question": "How many points are there in modifications to readout instrumentation",
+      "ground_truth": "5.",
+      "prediction": "5",
+      "anls": 0.5,
+      "time_seconds": 1.32
+    },
+    {
+      "id": 5,
+      "question": "what is the date in the letter",
+      "ground_truth": "June 11, 1990",
+      "prediction": "June 11, 1990",
+      "anls": 1.0,
+      "time_seconds": 0.91
+    },
+    {
+      "id": 6,
+      "question": "Who sent the letter?",
+      "ground_truth": "Ted Sanders",
+      "prediction": "Ted Sanders",
+      "anls": 1.0,
+      "time_seconds": 1.34
+    },
+    {
+      "id": 7,
+      "question": "Which part of Virginia is this letter sent from",
+      "ground_truth": "Richmond",
+      "prediction": "Richmond",
+      "anls": 1.0,
+      "time_seconds": 1.38
+    },
+    {
+      "id": 8,
+      "question": "What sort of communication/letter is this ?",
+      "ground_truth": "INTER-OFFICE CORRESPONDENCE",
+      "prediction": "INTER-OFFICE CORRESPONDENCE",
+      "anls": 1.0,
+      "time_seconds": 1.46
+    },
+    {
+      "id": 9,
+      "question": "What is the date mentioned in the letter?",
+      "ground_truth": "April 27, 1990",
+      "prediction": "April 27, 1990",
+      "anls": 1.0,
+      "time_seconds": 0.83
+    },
+    {
+      "id": 10,
+      "question": "Which test is used to evaluate ART menthol levels that has been shipped?",
+      "ground_truth": "A second Danchi Test",
+      "prediction": "Second Danchi test",
+      "anls": 0.9,
+      "time_seconds": 1.45
+    },
+    {
+      "id": 11,
+      "question": "What is the subject of the document/letter?",
+      "ground_truth": "Flavor Development Monthly Summary for April, 1990",
+      "prediction": "Flavor Development Monthly Summary for April, 1990",
+      "anls": 1.0,
+      "time_seconds": 1.55
+    },
+    {
+      "id": 12,
+      "question": "what is the index for Retention of Franchise",
+      "ground_truth": "100",
+      "prediction": "(100)",
+      "anls": 0.6,
+      "time_seconds": 1.29
+    },
+    {
+      "id": 13,
+      "question": "What is the source",
+      "ground_truth": "USMM 1/95-6/95, 12-Month Data",
+      "prediction": "USMM 1/95-6/95, 12-Month Data",
+      "anls": 1.0,
+      "time_seconds": 1.58
+    },
+    {
+      "id": 14,
+      "question": "The number mentioned on the right of the leftside margin?",
+      "ground_truth": "314002838",
+      "prediction": "314002838",
+      "anls": 1.0,
+      "time_seconds": 1.38
+    },
+    {
+      "id": 15,
+      "question": "what mm Marlboro Menthol were subjectively smoked by the Richmond Panel",
+      "ground_truth": "80mm and 83mm",
+      "prediction": "80mm and 83mm",
+      "anls": 1.0,
+      "time_seconds": 1.42
+    },
+    {
+      "id": 16,
+      "question": "Cigarettes will be produced and submitted to O/C Panel for what purpose?",
+      "ground_truth": "evaluation of lip release",
+      "prediction": "evaluation of lip release",
+      "anls": 1.0,
+      "time_seconds": 0.72
+    },
+    {
+      "id": 17,
+      "question": "Another model of the 83mm with zero ventilation will be made at Semiworks within how many weeks",
+      "ground_truth": "next 2-3 weeks",
+      "prediction": "2-3 weeks",
+      "anls": 0.643,
+      "time_seconds": 1.34
+    },
+    {
+      "id": 18,
+      "question": "Under BOLD, primary production of Blend #24- will be completed by which date",
+      "ground_truth": "6/7/90",
+      "prediction": "6/7/90",
+      "anls": 1.0,
+      "time_seconds": 1.38
+    },
+    {
+      "id": 19,
+      "question": "During the process of prototype production and ringtipping, some cigarettes were observed to have burn holed in which paper",
+      "ground_truth": "Cigarette paper",
+      "prediction": "cigarette paper",
+      "anls": 1.0,
+      "time_seconds": 1.33
+    },
+    {
+      "id": 20,
+      "question": "Where was the conference held?",
+      "ground_truth": "B&W headquarters",
+      "prediction": "B&W Headquarters",
+      "anls": 1.0,
+      "time_seconds": 1.44
+    },
+    {
+      "id": 21,
+      "question": "How many distinct mechanisms appear to play a role in the breakup of a smoke column into a multi-dimensional flowfield?",
+      "ground_truth": "At least two",
+      "prediction": "At least two distinct mechanisms",
+      "anls": 0.0,
+      "time_seconds": 1.43
+    },
+    {
+      "id": 22,
+      "question": "One variable that has implicitly not been controlled?",
+      "ground_truth": "influence of the test chamber (glass mouth) geometry.",
+      "prediction": "the influence of the test chamber (glass mouth) geometry",
+      "anls": 0.911,
+      "time_seconds": 0.96
+    },
+    {
+      "id": 23,
+      "question": "Which hetero-atoms  does polar compounds contain?",
+      "ground_truth": "nitrogen, sulfur and oxygen.",
+      "prediction": "nitrogen, sulfur and oxygen",
+      "anls": 0.964,
+      "time_seconds": 1.48
+    },
+    {
+      "id": 24,
+      "question": "What is the full form of POVC?",
+      "ground_truth": "POLAR VOLATILE ORGANICS",
+      "prediction": "Polar Volatile Organics",
+      "anls": 1.0,
+      "time_seconds": 0.83
+    },
+    {
+      "id": 25,
+      "question": "What is the slope mentioned in the first table?",
+      "ground_truth": "0.1088102E+01",
+      "prediction": "0.1088102E+01",
+      "anls": 1.0,
+      "time_seconds": 1.51
+    },
+    {
+      "id": 26,
+      "question": "What is the date mentioned in the second table?",
+      "ground_truth": "05-12-92",
+      "prediction": "05-12-92",
+      "anls": 1.0,
+      "time_seconds": 1.38
+    },
+    {
+      "id": 27,
+      "question": "Where were the two magnesium containing  papers made at?",
+      "ground_truth": "University of Maine",
+      "prediction": "University of Maine",
+      "anls": 1.0,
+      "time_seconds": 1.4
+    },
+    {
+      "id": 28,
+      "question": "Which base paper will be coated in-house with various levels of mono potassium phosphate and malonic acid in order to optimize the system?",
+      "ground_truth": "091",
+      "prediction": "091 base paper",
+      "anls": 0.0,
+      "time_seconds": 1.42
+    },
+    {
+      "id": 29,
+      "question": "which cigarette would be better if offered on a thicker cigarette",
+      "ground_truth": "low smoke cigarette",
+      "prediction": "low smoke cigarette",
+      "anls": 1.0,
+      "time_seconds": 0.69
+    },
+    {
+      "id": 30,
+      "question": "Hand sheets were made utilizing a 30% level of which component?",
+      "ground_truth": "high surface area magnesium carbonate semihydrate made by the pyrolysis of magnesium ammonium carbonate",
+      "prediction": "a high surface area magnesium carbonate semihydrate",
+      "anls": 0.0,
+      "time_seconds": 1.56
+    },
+    {
+      "id": 31,
+      "question": "How much percent had not noticed any difference in the odor of VSSS",
+      "ground_truth": "Over Fifty percent",
+      "prediction": "Over fifty percent",
+      "anls": 1.0,
+      "time_seconds": 1.32
+    },
+    {
+      "id": 32,
+      "question": "who were bothered by cigarette odors",
+      "ground_truth": "Nonsmokers",
+      "prediction": "nonsmokers",
+      "anls": 1.0,
+      "time_seconds": 0.71
+    },
+    {
+      "id": 33,
+      "question": "What is the cigarette code of RIP-6(W/O Filter) 21/4SE",
+      "ground_truth": "P4049-99(5C)",
+      "prediction": "P4049-99(5C)",
+      "anls": 1.0,
+      "time_seconds": 0.7
+    },
+    {
+      "id": 34,
+      "question": "What is the subject?",
+      "ground_truth": "reduced ignition propensity/498",
+      "prediction": "Reduced Ignition Propensity/498",
+      "anls": 1.0,
+      "time_seconds": 1.41
+    },
+    {
+      "id": 35,
+      "question": "What is the meeting date?",
+      "ground_truth": "January 24, 1994",
+      "prediction": "January 24, 1994",
+      "anls": 1.0,
+      "time_seconds": 1.79
+    },
+    {
+      "id": 36,
+      "question": "How many one-on-one  interviews were completed during April 10th through the April 12th?",
+      "ground_truth": "forty",
+      "prediction": "approximately forty",
+      "anls": 0.0,
+      "time_seconds": 1.28
+    },
+    {
+      "id": 37,
+      "question": "According to the listed requirements , what must be the age group of female smokers?",
+      "ground_truth": "between the ages of 18 and 55",
+      "prediction": "between the ages of 18 and 55",
+      "anls": 1.0,
+      "time_seconds": 0.81
+    },
+    {
+      "id": 38,
+      "question": "According to the requirements what is the minimum required consumption of a regular brand?",
+      "ground_truth": "1/2 pack",
+      "prediction": "at least 1/2 pack",
+      "anls": 0.0,
+      "time_seconds": 0.73
+    },
+    {
+      "id": 39,
+      "question": "How many focus groups were held?",
+      "ground_truth": "Two",
+      "prediction": "Two",
+      "anls": 1.0,
+      "time_seconds": 0.65
+    },
+    {
+      "id": 40,
+      "question": "Which interviews covered the same topics, except packaging, that were discussed in groups?",
+      "ground_truth": "The one-on-one",
+      "prediction": "one-on-one interviews",
+      "anls": 0.0,
+      "time_seconds": 1.28
+    },
+    {
+      "id": 41,
+      "question": "What is the Best Prototype mentioned?",
+      "ground_truth": "327391",
+      "prediction": "327391",
+      "anls": 1.0,
+      "time_seconds": 1.36
+    },
+    {
+      "id": 42,
+      "question": "What is the LBS AT TARGET of TOTAL STRIPS?",
+      "ground_truth": "10,000.0 @ 15.0 %",
+      "prediction": "10,000.0 @ 15.0 %",
+      "anls": 1.0,
+      "time_seconds": 1.52
+    },
+    {
+      "id": 43,
+      "question": "What is the SOLID LBS of T2F GRADE?",
+      "ground_truth": "510.0",
+      "prediction": "510.0",
+      "anls": 1.0,
+      "time_seconds": 0.73
+    },
+    {
+      "id": 44,
+      "question": "To whom is this letter addressed?",
+      "ground_truth": "mr. roger jennings",
+      "prediction": "Mr. Roger Jennings",
+      "anls": 1.0,
+      "time_seconds": 1.35
+    },
+    {
+      "id": 45,
+      "question": "What is the subject of the letter?",
+      "ground_truth": "effect of chemical stimulation on the perception of draw",
+      "prediction": "Effect of Chemical Stimulation on the Perception of Draw",
+      "anls": 1.0,
+      "time_seconds": 0.78
+    },
+    {
+      "id": 46,
+      "question": "When did the Human Research Committee meet to consider the proposal?",
+      "ground_truth": "November 27, 1990",
+      "prediction": "November 27, 1990",
+      "anls": 1.0,
+      "time_seconds": 1.47
+    },
+    {
+      "id": 47,
+      "question": "For what does the Bristol tippings have high ink weights for?",
+      "ground_truth": "Cork-on-white tipping",
+      "prediction": "cork-on-white tipping",
+      "anls": 1.0,
+      "time_seconds": 1.36
+    },
+    {
+      "id": 48,
+      "question": "When the cigarette was smoked into the filter, what had 5% flare-up while the low silicate ink tipping had 1% flare-up?",
+      "ground_truth": "the standard Ink tipping",
+      "prediction": "standard ink tipping",
+      "anls": 0.833,
+      "time_seconds": 1.34
+    },
+    {
+      "id": 49,
+      "question": "Which inks give significantly lower filter flare-up rates?",
+      "ground_truth": "low silicate inks",
+      "prediction": "low silicate inks",
+      "anls": 1.0,
+      "time_seconds": 1.38
+    }
+  ]
+}
