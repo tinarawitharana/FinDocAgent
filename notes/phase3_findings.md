@@ -106,3 +106,5 @@ text-only pipelines?" YES — dramatically. 0.847 vs 0.000 ANLS.
 ### Next evaluation needed
 - RQ1: Agent vs single-pass comparison (anomaly detection F1)
 - RQ3: Human evaluation of attention maps (XAI compliance)
+
+some of the things
