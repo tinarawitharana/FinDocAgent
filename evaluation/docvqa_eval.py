@@ -76,18 +76,18 @@ def run_docvqa_evaluation():
 
     for i, example in enumerate(samples):
         question = example['query']['en']
-        ground_truth = example['answer']['text']
+        ground_truths = example['answers']
         image = example['image']
 
         print(f"\n[{i+1}/{NUM_SAMPLES}] Q: {question[:60]}...")
-        print(f"      GT: {ground_truth}")
+        print(f"      GT: {ground_truths}")
 
         try:
             start = time.time()
             prediction = qwen_single_pass(image, question)
             elapsed = time.time() - start
 
-            score = anls_score(prediction, ground_truth)
+            score = max(anls_score(prediction, gt) for gt in ground_truths)
             qwen_scores.append(score)
 
             print(f"    Pred: {prediction}")
@@ -96,7 +96,7 @@ def run_docvqa_evaluation():
             results.append({
                 "id": i,
                 "question": question,
-                "ground_truth": ground_truth,
+                "ground_truth": ground_truths,
                 "prediction": prediction,
                 "anls": round(score, 3),
                 "time_seconds": round(elapsed, 2)
@@ -109,7 +109,7 @@ def run_docvqa_evaluation():
             results.append({
                 "id": id,
                 "question": question,
-                "ground_truth": ground_truth,
+                "ground_truth": ground_truths,
                 "prediction": "ERROR",
                 "anls": 0.0,
                 "time_seconds": 0.0

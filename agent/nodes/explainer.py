@@ -3,10 +3,10 @@ from agent.state import AgentState
 def explainer_node(state: AgentState) -> AgentState:
     print(f"[EXPLAINER] Generating risk report based on anomalies and extracted fields...")
 
-    anamolies = state["anamolies"]
+    anomalies = state["anomalies"]
     fields = state["extracted_fields"]
 
-    risk_level = "HIGH" if anamolies else "LOW"
+    risk_level = "HIGH" if anomalies else "LOW"
 
     report = f"""
 --- FINDOCAGENT RISK REPORT ---
@@ -17,10 +17,10 @@ Extracted Fields:
 Vendor: {fields.get('vendor', 'Unknown')}
 Stated Total: £{fields.get('stated_total', 0)}
 
-Anamolies Detected: {len(anamolies)}
+anomalies Detected: {len(anomalies)}
     """
 
-    for a in anamolies:
+    for a in anomalies:
         report += f"\n- {a['type']}: Stated £{a['stated']} vs Calculated £{a['calculated']} (Difference: £{a['difference']})"
 
     #dummy

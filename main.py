@@ -11,7 +11,7 @@ def main():
         "document_path": "data/samples/bank_statement_anomaly_word.pdf",
         "retrieved_chunks": [],
         "extracted_fields": {},
-        "anamolies": [],
+        "anomalies": [],
         "risk_report": "",
         "iteration_count": 0,
         "task_complete": False
@@ -22,7 +22,7 @@ def main():
 
     print ("\nFINDOCAGENT finished.")
     print(f"Total steps taken: {result['iteration_count']} ")
-    print(f"Anamolies found: {len(result['anamolies'])} ")
+    print(f"anomalies found: {len(result['anomalies'])} ")
 
 if __name__ == "__main__":
     main()

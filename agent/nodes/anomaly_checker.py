@@ -4,7 +4,7 @@ def anomaly_checker_node(state: AgentState) -> AgentState:
     print(f"[ANOMALY CHECKER] Checking for anomalies in extracted fields...")
 
     fields = state["extracted_fields"]
-    anamolies = []
+    anomalies = []
 
     #rule - does the math add up
     if fields:
@@ -14,7 +14,7 @@ def anomaly_checker_node(state: AgentState) -> AgentState:
         )
 
         if abs(stated - calculated) > 0.01:
-            anamolies.append({
+            anomalies.append({
                 "type": "math_discrepancy",
                 "stated": stated,
                 "calculated": calculated,
@@ -27,6 +27,6 @@ def anomaly_checker_node(state: AgentState) -> AgentState:
 
 
     #dummy
-    state['anamolies'] = anamolies
+    state['anomalies'] = anomalies
 
     return state

@@ -5,14 +5,20 @@ class AgentState(TypedDict):
     #document analyzing
     document_path: str
 
+    #quesion to answer
+    question: str
+
     #retriver finds
     retrieved_chunks: List[str]
 
     #extractor pulls out
     extracted_fields: dict
 
+    #agents answer
+    answer: str
+
     #anamoly checker flags
-    anamolies: List[str]
+    anomalies: List[str]
 
     #final output
     risk_report: str
