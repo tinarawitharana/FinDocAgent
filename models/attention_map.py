@@ -3,7 +3,7 @@ import torch
 import numpy as np 
 from PIL import Image 
 import matplotlib.pyplot as plt 
-from transformers import Qwen2VLForConditional, AutoProcessor
+from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
 MODEL_NAME = "Qwen/Qwen2-VL-2B-Instruct"
@@ -21,10 +21,14 @@ def load_local_model():
     _model = Qwen2VLForConditionalGeneration.from_pretrained(
         MODEL_NAME,
         torch_dtype=torch.bfloat16,
-        device_map="auto",
+        device_map = "auto",
         attn_implementation="eager"  # flash attention doesn't return attention weights
     )
-    _processor = AutoProcessor.from_pretrained(MODEL_NAME)
+    _processor = AutoProcessor.from_pretrained(
+        MODEL_NAME,
+        min_pixels=32*28*28,
+        max_pixels=128*28*28
+        )
     print("[ATTENTION] Model loaded.")
     return _model, _processor
 
@@ -70,9 +74,7 @@ def generate_attention_map(pil_image, question, save_path=None):
     # step 2: forward pass on full sequence (input + answer) to extract attention
     with torch.no_grad():
         outputs = model(
-            input_ids=gen_ids,
-            pixel_values=inputs.get("pixel_values"),
-            image_grid_thw=inputs.get("image_grid_thw"),
+            **inputs,
             output_attentions=True
         )
 
