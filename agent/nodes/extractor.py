@@ -41,13 +41,17 @@ def extractor_node(state: AgentState) -> AgentState:
                         },
                         {
                             "type": "text",
-                            "text": f"{state['question']}\nAnswer with the exact text from the document. Be concise, one word or short phrase only."
+                            "text": f"Look at the document carefully. Find the section relevant to this question: {state['question']}\nExtract the exact answer as it appears in the document. Be concise, one word or short phrase only."
+
+
 
                         }
                     ]
                 }
             ],
-            max_tokens=50
+            max_tokens=50,
+            temperature =0
+           
         )
 
         state["answer"] = response.choices[0].message.content.strip()

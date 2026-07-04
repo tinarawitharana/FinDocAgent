@@ -1,7 +1,7 @@
 {
   "dataset": "DocVQA (nielsr/docvqa_1200_examples)",
   "num_samples": 50,
-  "qwen_vl_max_anls": 0.954,
+  "qwen_vl_max_anls": 0.952,
   "reference_layoutlmv3": 0.834,
   "reference_qwen2vl_7b": 0.945,
   "per_question_results": [
@@ -13,7 +13,7 @@
       ],
       "prediction": "1/8/93",
       "anls": 1.0,
-      "time_seconds": 2.92
+      "time_seconds": 2.89
     },
     {
       "id": 1,
@@ -21,8 +21,8 @@
       "ground_truth": [
         "T.F. Riehl"
       ],
-      "prediction": "T.F. Riehl",
-      "anls": 1.0,
+      "prediction": "T. F. Riehl",
+      "anls": 0.909,
       "time_seconds": 1.64
     },
     {
@@ -33,7 +33,7 @@
       ],
       "prediction": "Review of Existing Brainstorming Ideas/483",
       "anls": 1.0,
-      "time_seconds": 1.52
+      "time_seconds": 1.53
     },
     {
       "id": 3,
@@ -43,7 +43,7 @@
       ],
       "prediction": "499150498",
       "anls": 1.0,
-      "time_seconds": 1.48
+      "time_seconds": 1.46
     },
     {
       "id": 4,
@@ -52,9 +52,9 @@
         "5.",
         "5"
       ],
-      "prediction": "5.",
+      "prediction": "5",
       "anls": 1.0,
-      "time_seconds": 1.35
+      "time_seconds": 1.34
     },
     {
       "id": 5,
@@ -65,7 +65,7 @@
       ],
       "prediction": "June 11, 1990",
       "anls": 1.0,
-      "time_seconds": 1.53
+      "time_seconds": 1.52
     },
     {
       "id": 6,
@@ -75,7 +75,7 @@
       ],
       "prediction": "Ted Sanders",
       "anls": 1.0,
-      "time_seconds": 1.39
+      "time_seconds": 1.51
     },
     {
       "id": 7,
@@ -85,7 +85,7 @@
       ],
       "prediction": "Richmond",
       "anls": 1.0,
-      "time_seconds": 1.37
+      "time_seconds": 1.36
     },
     {
       "id": 8,
@@ -105,7 +105,7 @@
       ],
       "prediction": "April 27, 1990",
       "anls": 1.0,
-      "time_seconds": 1.51
+      "time_seconds": 1.49
     },
     {
       "id": 10,
@@ -113,8 +113,8 @@
       "ground_truth": [
         "A second Danchi Test"
       ],
-      "prediction": "Second Danchi test",
-      "anls": 0.9,
+      "prediction": "A second Danchi test",
+      "anls": 1.0,
       "time_seconds": 1.41
     },
     {
@@ -136,7 +136,7 @@
       ],
       "prediction": "(100)",
       "anls": 1.0,
-      "time_seconds": 1.38
+      "time_seconds": 1.33
     },
     {
       "id": 13,
@@ -146,7 +146,7 @@
       ],
       "prediction": "USMM 1/95-6/95, 12-Month Data",
       "anls": 1.0,
-      "time_seconds": 1.59
+      "time_seconds": 2.19
     },
     {
       "id": 14,
@@ -166,7 +166,7 @@
       ],
       "prediction": "80mm and 83mm",
       "anls": 1.0,
-      "time_seconds": 1.43
+      "time_seconds": 1.4
     },
     {
       "id": 16,
@@ -176,7 +176,7 @@
       ],
       "prediction": "evaluation of lip release",
       "anls": 1.0,
-      "time_seconds": 1.34
+      "time_seconds": 1.35
     },
     {
       "id": 17,
@@ -186,9 +186,9 @@
         "within the next 2-3 weeks",
         "2-3 weeks"
       ],
-      "prediction": "2-3 weeks",
-      "anls": 1.0,
-      "time_seconds": 1.33
+      "prediction": "the next 2-3 weeks",
+      "anls": 0.778,
+      "time_seconds": 1.39
     },
     {
       "id": 18,
@@ -198,7 +198,7 @@
       ],
       "prediction": "6/7/90",
       "anls": 1.0,
-      "time_seconds": 1.38
+      "time_seconds": 1.4
     },
     {
       "id": 19,
@@ -209,7 +209,7 @@
       ],
       "prediction": "cigarette paper",
       "anls": 1.0,
-      "time_seconds": 1.38
+      "time_seconds": 1.54
     },
     {
       "id": 20,
@@ -218,9 +218,9 @@
         "B&W headquarters",
         "B&W Headquarters"
       ],
-      "prediction": "B&W Headquarters",
-      "anls": 1.0,
-      "time_seconds": 1.41
+      "prediction": "B&K Headquarters",
+      "anls": 0.938,
+      "time_seconds": 1.42
     },
     {
       "id": 21,
@@ -231,7 +231,7 @@
       ],
       "prediction": "At least two",
       "anls": 1.0,
-      "time_seconds": 1.4
+      "time_seconds": 1.42
     },
     {
       "id": 22,
@@ -242,7 +242,7 @@
       ],
       "prediction": "the influence of the test chamber (glass mouth) geometry",
       "anls": 1.0,
-      "time_seconds": 1.57
+      "time_seconds": 1.54
     },
     {
       "id": 23,
@@ -253,7 +253,7 @@
       ],
       "prediction": "nitrogen, sulfur and oxygen",
       "anls": 1.0,
-      "time_seconds": 1.48
+      "time_seconds": 1.5
     },
     {
       "id": 24,
@@ -263,7 +263,7 @@
       ],
       "prediction": "Polar Volatile Organics",
       "anls": 1.0,
-      "time_seconds": 1.5
+      "time_seconds": 4.61
     },
     {
       "id": 25,
@@ -273,7 +273,7 @@
       ],
       "prediction": "0.1088102E+01",
       "anls": 1.0,
-      "time_seconds": 1.49
+      "time_seconds": 1.48
     },
     {
       "id": 26,
@@ -283,7 +283,7 @@
       ],
       "prediction": "05-12-92",
       "anls": 1.0,
-      "time_seconds": 1.41
+      "time_seconds": 1.38
     },
     {
       "id": 27,
@@ -293,7 +293,7 @@
       ],
       "prediction": "University of Maine",
       "anls": 1.0,
-      "time_seconds": 1.39
+      "time_seconds": 1.35
     },
     {
       "id": 28,
@@ -302,9 +302,9 @@
         "091",
         "The 091 Base paper"
       ],
-      "prediction": "091 base paper",
-      "anls": 0.778,
-      "time_seconds": 1.43
+      "prediction": "The 091 base paper",
+      "anls": 1.0,
+      "time_seconds": 1.44
     },
     {
       "id": 29,
@@ -316,7 +316,7 @@
       ],
       "prediction": "low smoke cigarette",
       "anls": 1.0,
-      "time_seconds": 1.32
+      "time_seconds": 1.35
     },
     {
       "id": 30,
@@ -328,7 +328,7 @@
       ],
       "prediction": "a high surface area magnesium carbonate semihydrate",
       "anls": 1.0,
-      "time_seconds": 1.55
+      "time_seconds": 1.54
     },
     {
       "id": 31,
@@ -339,7 +339,7 @@
       ],
       "prediction": "Over fifty percent",
       "anls": 1.0,
-      "time_seconds": 1.35
+      "time_seconds": 1.32
     },
     {
       "id": 32,
@@ -351,7 +351,7 @@
       ],
       "prediction": "nonsmokers",
       "anls": 1.0,
-      "time_seconds": 1.37
+      "time_seconds": 1.35
     },
     {
       "id": 33,
@@ -361,7 +361,7 @@
       ],
       "prediction": "P4049-99(5C)",
       "anls": 1.0,
-      "time_seconds": 1.41
+      "time_seconds": 1.43
     },
     {
       "id": 34,
@@ -372,7 +372,7 @@
       ],
       "prediction": "Reduced Ignition Propensity/498",
       "anls": 1.0,
-      "time_seconds": 1.39
+      "time_seconds": 1.38
     },
     {
       "id": 35,
@@ -383,7 +383,7 @@
       ],
       "prediction": "January 24, 1994",
       "anls": 1.0,
-      "time_seconds": 1.39
+      "time_seconds": 1.86
     },
     {
       "id": 36,
@@ -393,7 +393,7 @@
       ],
       "prediction": "approximately forty",
       "anls": 0.0,
-      "time_seconds": 1.29
+      "time_seconds": 1.23
     },
     {
       "id": 37,
@@ -403,7 +403,7 @@
       ],
       "prediction": "between the ages of 18 and 55",
       "anls": 1.0,
-      "time_seconds": 1.43
+      "time_seconds": 1.44
     },
     {
       "id": 38,
@@ -413,7 +413,7 @@
       ],
       "prediction": "at least 1/2 pack",
       "anls": 0.0,
-      "time_seconds": 0.72
+      "time_seconds": 0.71
     },
     {
       "id": 39,
@@ -435,7 +435,7 @@
       ],
       "prediction": "The one-on-one interviews",
       "anls": 1.0,
-      "time_seconds": 0.65
+      "time_seconds": 1.31
     },
     {
       "id": 41,
@@ -466,7 +466,7 @@
       ],
       "prediction": "510.0",
       "anls": 1.0,
-      "time_seconds": 1.32
+      "time_seconds": 1.33
     },
     {
       "id": 44,
@@ -487,7 +487,7 @@
       ],
       "prediction": "Effect of Chemical Stimulation on the Perception of Draw",
       "anls": 1.0,
-      "time_seconds": 1.49
+      "time_seconds": 1.53
     },
     {
       "id": 46,
@@ -497,7 +497,7 @@
       ],
       "prediction": "November 27, 1990",
       "anls": 1.0,
-      "time_seconds": 1.47
+      "time_seconds": 1.45
     },
     {
       "id": 47,
@@ -517,9 +517,9 @@
         "the standard Ink tipping",
         "standard ink tipping"
       ],
-      "prediction": "the standard ink tipping",
+      "prediction": "standard ink tipping",
       "anls": 1.0,
-      "time_seconds": 1.36
+      "time_seconds": 1.35
     },
     {
       "id": 49,
@@ -529,7 +529,7 @@
       ],
       "prediction": "low silicate inks",
       "anls": 1.0,
-      "time_seconds": 1.36
+      "time_seconds": 1.34
     }
   ]
 }
