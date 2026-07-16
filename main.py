@@ -8,7 +8,7 @@ def main():
 
     #intial_state
     initial_state = {
-        "document_path": "data/samples/bank_statement_anomaly_word.pdf",
+        "document_path": "data/samples/hsbc1.pdf",
         "retrieved_chunks": [],
         "extracted_fields": {},
         "anomalies": [],
