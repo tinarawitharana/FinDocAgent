@@ -6,24 +6,28 @@ from agent.nodes.anomaly_checker import anomaly_checker_node
 from agent.nodes.explainer import explainer_node
 
 def should_continue(state: AgentState) -> str:
-    
-    #hit the limit
-    if state["iteration_count"] >= 10:
-        return "explainer"
 
-    #job done
-    if state["task_complete"]:
+    # QA mode — check if answer needs a retry
+    if state.get("question"):
+        answer = state.get("answer", "").lower()
+        negative_phrases = ["not found", "not available", "not specified",
+                            "not provided", "does not contain", "does not provide",
+                            "insufficient", "not disclosed", "cannot find"]
+        is_negative = any(phrase in answer for phrase in negative_phrases)
+
+        if is_negative and state["iteration_count"] < 3:
+            return "retriever"
         return END
 
-    #Have fields - check for anomalies
+    # bank statement mode — existing logic unchanged
+    if state["iteration_count"] >= 10:
+        return "explainer"
+    if state["task_complete"]:
+        return END
     if state["extracted_fields"]:
         return "anomaly_checker"
-
-    #have chunks - try to extract
     if state["retrieved_chunks"]:
         return "extractor"
-
-    #nothing yet
     return "retriever"
 
 def build_graph():

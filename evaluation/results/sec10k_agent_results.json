@@ -1,0 +1,478 @@
+{
+  "dataset": "SEC 10-K (RAG agent pipeline)",
+  "num_questions": 39,
+  "anls": 0.658,
+  "per_question": [
+    {
+      "company": "JPMorgan Chase",
+      "question": "What was JPMorgan Chase's total net revenue for 2023?",
+      "ground_truths": [
+        "158,104",
+        "$158,104",
+        "$158,104 million",
+        "158,104 million"
+      ],
+      "prediction": "$158,104",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "What was JPMorgan Chase's net income for 2023?",
+      "ground_truths": [
+        "49,552",
+        "$49,552",
+        "$49,552 million",
+        "49,552 million"
+      ],
+      "prediction": "$ 6,143",
+      "anls": 0.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "How many employees did JPMorgan Chase have in 2023?",
+      "ground_truths": [
+        "309,926",
+        "approximately 309,926",
+        "309926",
+        "300,000+"
+      ],
+      "prediction": "309,926",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "What were JPMorgan Chase's total assets at end of 2023?",
+      "ground_truths": [
+        "3,875,393",
+        "$3,875,393",
+        "$3,875,393 million",
+        "3,875,393 million",
+        "$3.9 trillion"
+      ],
+      "prediction": "$ 3,875,393",
+      "anls": 0.909
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "Who is the Chairman and Chief Executive Officer of JPMorgan Chase?",
+      "ground_truths": [
+        "Jamie Dimon",
+        "James Dimon"
+      ],
+      "prediction": "James Dimon",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "What was the provision for credit losses in 2023?",
+      "ground_truths": [
+        "9,320",
+        "$9,320",
+        "$9,320 million",
+        "9,320 million",
+        "$9.3 billion",
+        "9.3 billion"
+      ],
+      "prediction": "$ 9,320",
+      "anls": 0.857
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "What was JPMorgan Chase's total noninterest expense for 2023?",
+      "ground_truths": [
+        "87,172",
+        "$87,172",
+        "$87,172 million",
+        "87,172 million"
+      ],
+      "prediction": "87,172",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "How many markets did JPMorgan expand the EOCF program to in 2023?",
+      "ground_truths": [
+        "10",
+        "10 markets"
+      ],
+      "prediction": "10",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "How many loans were deployed through the EOCF program across 10 markets in 2023?",
+      "ground_truths": [
+        "2,900",
+        "more than 2,900",
+        "2,900 loans"
+      ],
+      "prediction": "2,900",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "How much capital was deployed to underserved entrepreneurs across the country in 2023?",
+      "ground_truths": [
+        "$176 million",
+        "176 million",
+        "$176"
+      ],
+      "prediction": "$176 million",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "What was JPMorgan Chase's Racial Equity Commitment amount?",
+      "ground_truths": [
+        "$30 billion",
+        "30 billion",
+        "$30"
+      ],
+      "prediction": "$30 billion",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "How many affordable housing rental units were preserved through JPMorgan's Affordable Housing Preservation program?",
+      "ground_truths": [
+        "190,000",
+        "over 190,000",
+        "approximately 190,000"
+      ],
+      "prediction": "190,000",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "How many grants has JPMorgan provided since its Homebuyer Grant program began in 2021?",
+      "ground_truths": [
+        "8,600",
+        "about 8,600",
+        "approximately 8,600"
+      ],
+      "prediction": "8,600",
+      "anls": 1.0
+    },
+    {
+      "company": "JPMorgan Chase",
+      "question": "What were JPMorgan Chase's total wealth management assets at the end of 2023?",
+      "ground_truths": [
+        "$950 billion",
+        "950 billion",
+        "$950",
+        "$1.7 trillion",
+        "1.7 trillion"
+      ],
+      "prediction": "3,177",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were Goldman Sachs's total net revenues across all segments for fiscal year 2023?",
+      "ground_truths": [
+        "46,254",
+        "$46,254",
+        "$46,254 million",
+        "46,254 million",
+        "$43,820 million",
+        "43,820"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were Goldman Sachs's total assets allocated across all business segments at end of 2023?",
+      "ground_truths": [
+        "1,641,594",
+        "$1,641,594",
+        "$1,641,594 million",
+        "1,641,594 million"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's total pre-tax net earnings for fiscal year 2023?",
+      "ground_truths": [
+        "10,739",
+        "$10,739",
+        "$10,739 million",
+        "10,739 million",
+        "$16.4 billion",
+        "16.4 billion"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were net revenues for the Global Banking and Markets segment in 2023?",
+      "ground_truths": [
+        "29,996",
+        "$29,996",
+        "$29,996 million",
+        "29,996 million"
+      ],
+      "prediction": "$12,060 $11,549",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's firmwide return on average common equity for fiscal year 2023?",
+      "ground_truths": [
+        "7.5%",
+        "7.5"
+      ],
+      "prediction": "7.5%",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was the return on average common equity for the Platform Solutions segment in 2023?",
+      "ground_truths": [
+        "(45.2)%",
+        "-45.2%",
+        "(45.2)",
+        "-45.2",
+        "-45.21%"
+      ],
+      "prediction": "(45.2)%",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were Goldman Sachs's total operating expenses across all segments for fiscal year 2023?",
+      "ground_truths": [
+        "34,487",
+        "$34,487",
+        "$34,487 million",
+        "34,487 million",
+        "$34.5 billion",
+        "34.5 billion"
+      ],
+      "prediction": "34,487",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was the total loan balance net of allowances in Goldman Sachs's Global Banking and Markets segment for 2023?",
+      "ground_truths": [
+        "117,464",
+        "$117,464",
+        "$117,464 million",
+        "117,464 million"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was the corporate loan balance in Goldman Sachs's Global Banking and Markets segment in 2023?",
+      "ground_truths": [
+        "24,159",
+        "$24,159",
+        "$24,159 million",
+        "24,159 million"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's Global Banking and Markets real estate loan portfolio value in 2023?",
+      "ground_truths": [
+        "34,813",
+        "$34,813",
+        "$34,813 million",
+        "34,813 million"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's allowance for credit losses in the Global Banking and Markets segment for 2023?",
+      "ground_truths": [
+        "(1,441)",
+        "1,441",
+        "($1,441)",
+        "$1,441 million",
+        "1,441 million"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "By what percentage did Goldman Sachs's Global Banking and Markets net revenues decrease from 2022 to 2023?",
+      "ground_truths": [
+        "8%",
+        "8",
+        "8% lower"
+      ],
+      "prediction": "8%",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's total investment banking fee revenue for fiscal year 2023?",
+      "ground_truths": [
+        "6.22 billion",
+        "$6.22 billion",
+        "6,216",
+        "$6,216 million",
+        "6,216 million",
+        "$6,216"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "According to Goldman Sachs's 2023 annual report, by what percentage did the S&P 500 increase during 2023?",
+      "ground_truths": [
+        "24%",
+        "24",
+        "20.8%",
+        "20.8"
+      ],
+      "prediction": "Not found",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "By what percentage did Goldman Sachs investment banking fees decline from 2022 to 2023?",
+      "ground_truths": [
+        "16%",
+        "16",
+        "16% lower"
+      ],
+      "prediction": "16%",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were the total assets in Goldman Sachs's Asset and Wealth Management segment at end of fiscal 2023?",
+      "ground_truths": [
+        "191,863",
+        "$191,863",
+        "$191,863 million",
+        "191,863 million"
+      ],
+      "prediction": "$ 191,863",
+      "anls": 0.889
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were net revenues for Goldman Sachs's Asset and Wealth Management segment for fiscal year 2023?",
+      "ground_truths": [
+        "13,880",
+        "$13,880",
+        "$13,880 million",
+        "13,880 million"
+      ],
+      "prediction": "13,880",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What were average Asset and Wealth Management gross loans for 2023?",
+      "ground_truths": [
+        "$51.98 billion",
+        "51.98 billion",
+        "51.98",
+        "$51.98"
+      ],
+      "prediction": "$51.98 billion",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's Asset and Wealth Management segment return on average common equity for 2023?",
+      "ground_truths": [
+        "3.2%",
+        "3.2"
+      ],
+      "prediction": "3.2%",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "By what percentage did Goldman Sachs Platform Solutions net revenues grow year-over-year in 2023?",
+      "ground_truths": [
+        "58%",
+        "58",
+        "58% higher"
+      ],
+      "prediction": "58%",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs Platform Solutions pre-tax loss in 2023?",
+      "ground_truths": [
+        "$2.18 billion",
+        "2.18 billion",
+        "2,175",
+        "$2,175 million",
+        "(2,175)",
+        "$1.2 billion",
+        "1.2 billion"
+      ],
+      "prediction": "(2,175)",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "By what percentage did Goldman Sachs Platform Solutions operating expenses increase in 2023 versus prior year?",
+      "ground_truths": [
+        "94%",
+        "94",
+        "94% higher"
+      ],
+      "prediction": "3,418",
+      "anls": 0.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was GS&Co regulatory net capital as of December 2023?",
+      "ground_truths": [
+        "$20.25 billion",
+        "20.25 billion",
+        "$20.25",
+        "20.25",
+        "$14,165 million",
+        "14,165 million",
+        "14,165"
+      ],
+      "prediction": "20.25 billion",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "By how much did GS&Co regulatory net capital exceed minimum requirements as of December 2023?",
+      "ground_truths": [
+        "$15.07 billion",
+        "15.07 billion",
+        "$15.07",
+        "15.07"
+      ],
+      "prediction": "15.07 billion",
+      "anls": 1.0
+    },
+    {
+      "company": "Goldman Sachs",
+      "question": "What was Goldman Sachs's total cash and cash equivalents balance at December 2023 year-end?",
+      "ground_truths": [
+        "$241.58 billion",
+        "241.58 billion",
+        "$241.58",
+        "241.58"
+      ],
+      "prediction": "$241.58 billion",
+      "anls": 1.0
+    }
+  ]
+}

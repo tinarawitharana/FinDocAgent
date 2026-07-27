@@ -21,42 +21,53 @@ def image_to_base64(image_path):
 def extractor_node(state: AgentState) -> AgentState:
     print(f"[EXTRACTOR] Extracting fields using Qwen2-VL...")
 
-    #docvqa - answer specific question
+    #question answering mode (image or PDF via RAG)
     if state.get("question"):
-        image_path = state["retrieved_chunks"][0]
+        chunk = state["retrieved_chunks"][0]
         print(f"[EXTRACTOR] Question mode: {state['question']}")
 
-        image_b64 = image_to_base64(image_path)
+        if os.path.isfile(chunk):
+            content = []
+            for image_path in state["retrieved_chunks"]:
+                image_b64 = image_to_base64(image_path)
+                content.append({
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/png;base64,{image_b64}"}
+                })
 
-        response = client.chat.completions.create(
-            model="qwen-vl-max",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image_url",
-                            "image_url": {"url": f"data:image/png;base64,{image_b64}"}
+            content.append({
+                "type": "text",
+                "text": (
+                    f"Look at these document pages carefully. Find the section relevant to this question: {state['question']}\n"
+                    "These pages may contain tables with multiple business segments and multiple fiscal years side by side. "
+                    "Before answering, briefly identify: (1) the exact row/line-item label that matches the question, "
+                    "(2) which segment/column it belongs to if the table has more than one segment, and "
+                    "(3) which fiscal year column it belongs to (use fiscal year 2023 unless the question asks otherwise).\n"
+                    "If you cannot clearly find this exact row, segment, and year in the visible pages, do not guess — "
+                    "state that identification step as 'not confident' and give your final answer as 'Not found'.\n"
+                    "State that identification in one short line, then on a new line write your final answer prefixed exactly with 'ANSWER: '. "
+                    "The final answer must be the exact number or short phrase as it appears in the document, with no added currency symbols, "
+                    "units, or words that are not already printed next to it — do not round or convert units."
+                )
+            })
 
-                        },
-                        {
-                            "type": "text",
-                            "text": f"Look at the document carefully. Find the section relevant to this question: {state['question']}\nExtract the exact answer as it appears in the document. Be concise, one word or short phrase only."
+
+            response = client.chat.completions.create(
+                model="qwen-vl-max",
+                messages=[{"role": "user", "content": content}],
+                max_tokens=200,
+                temperature=0
+            )
 
 
+            raw_output = response.choices[0].message.content.strip()
+            if "ANSWER:" in raw_output:
+                state["answer"] = raw_output.split("ANSWER:")[-1].strip()
+            else:
+                state["answer"] = raw_output
 
-                        }
-                    ]
-                }
-            ],
-            max_tokens=50,
-            temperature =0
-           
-        )
-
-        state["answer"] = response.choices[0].message.content.strip()
-        state["task_complete"] = True
-        print(f" [EXTRACTOR] Answer: {state['answer']}")
+        
+        print(f"[EXTRACTOR] Answer: {state['answer']}")
 
         return state
 

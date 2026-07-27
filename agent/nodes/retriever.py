@@ -1,7 +1,8 @@
 from agent.state import AgentState
 from document_parser.parser import extract_text_with_positions
-from vector_store.chroma import index_document, get_chroma_client, search_document
 import os
+from pdf2image import convert_from_path
+from vector_store.chroma import index_document, get_chroma_client, search_document, get_embedding_function, bm25_search, reciprocal_rank_fusion
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg"}
 
@@ -23,22 +24,55 @@ def retriever_node(state: AgentState) -> AgentState:
     #pdf path
     document_name = os.path.splitext(os.path.basename(document_path))[0]
 
-    #extract text from pdf
-    pages_data = extract_text_with_positions(document_path)
-
-    #index in chromadb
+    #index in chromaDB by resusing existing collection if doc already indexed
     client = get_chroma_client()
-    collection = index_document(pages_data, document_name=document_name, client=client)
+    embedding_function = get_embedding_function()
+
+    try:
+        collection = client.get_collection(name=document_name, embedding_function=embedding_function)
+        if collection.count() == 0:
+            raise ValueError("empty collection")
+    except Exception:
+        pages_data = extract_text_with_positions(document_path)
+        collection = index_document(pages_data, document_name=document_name, client=client)
+
+
 
     #seach for key financial info - dummy query for now
-    query = "Total amount due line items transactions"
-    results = search_document(collection, query, top_k=2)
+    query = state.get("question") or "Total amount due line items transactions"
 
-    #store retrieved chunks in state for next node to process
-    retrieved_chunks = results["documents"][0]
-    state["retrieved_chunks"] = retrieved_chunks
+    if state.get("question") and state["iteration_count"] == 1:
+        query = f"financial statement table annual report: {state['question']}"
+
+    elif state.get("question") and state["iteration_count"] >=2:
+        query = f"annual report corporate initiatives text: {state['question']}"
+
+    dense_results = search_document(collection, query, top_k=10)
+    # get the page numbers of the top-k results
+    dense_metadatas = dense_results["metadatas"][0]
+    dense_pages = list(dict.fromkeys(m["page_number"] for m in dense_metadatas))  # unique, order preserved
+
+    bm25_pages = bm25_search(collection, query, top_k=10)
+
+    #get pg numbers of top k results, combing dense + keyword search
+    page_numbers = reciprocal_rank_fusion([dense_pages, bm25_pages])[:6]
+
+    print(f"[RETRIEVER] Retrieved page numbers: {page_numbers}")
+
+
+    # convert only those pages to images
+    image_paths = []
+    os.makedirs("data/page_images", exist_ok=True)
+    for page_num in page_numbers:
+        imgs = convert_from_path(document_path, first_page=page_num, last_page=page_num, dpi=150)
+        image_path = f"data/page_images/{document_name}_page_{page_num}.png"
+        imgs[0].save(image_path, "PNG")
+        image_paths.append(image_path)
+
+    state["retrieved_chunks"] = image_paths
     state["iteration_count"] += 1
 
-    print(f"[RETRIEVER] Retrieved {len(retrieved_chunks)} chunks from document.")
+    print(f"[RETRIEVER] Retrieved {len(image_paths)} page images.")
+
 
     return state

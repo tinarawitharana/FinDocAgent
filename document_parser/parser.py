@@ -3,23 +3,37 @@ from pdf2image import convert_from_path
 import os
 
 def extract_text_with_positions(pdf_path):
-
     pages_data = []
 
     with pdfplumber.open(pdf_path) as pdf:
         for page_num, page in enumerate(pdf.pages):
             words = page.extract_words()
 
+            # plain text
+            plain_text = page.extract_text() or ""
+
+            # structured table extraction
+            table_text = ""
+            tables = page.extract_tables()
+            for table in tables:
+                for row in table:
+                    cleaned_row = [cell.strip() if cell else "" for cell in row]
+                    table_text += " | ".join(cleaned_row) + "\n"
+
+            # combine both
+            full_text = plain_text + "\n" + table_text if table_text else plain_text
+
             page_info = {
                 "page_number": page_num + 1,
                 "page_width": page.width,
                 "page_height": page.height,
                 "words": words,
-                "full_text": page.extract_text()
+                "full_text": full_text
             }
             pages_data.append(page_info)
 
     return pages_data
+
 
 def convert_pages_to_images(pdf_path, output_dir = "data/page_images", dpi=200):
 
