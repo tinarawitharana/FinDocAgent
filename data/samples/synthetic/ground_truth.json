@@ -1,0 +1,38 @@
+[
+  {
+    "file": "data/samples/synthetic/statement_01_clean.pdf",
+    "bank_name": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2459.3,
+    "calculated_total": 2459.3,
+    "math_discrepancy": 0.0,
+    "date_swap_applied": false
+  },
+  {
+    "file": "data/samples/synthetic/statement_02_math_error.pdf",
+    "bank_name": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2709.3,
+    "calculated_total": 2459.3,
+    "math_discrepancy": 250.0,
+    "date_swap_applied": false
+  },
+  {
+    "file": "data/samples/synthetic/statement_03_date_error.pdf",
+    "bank_name": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2459.3,
+    "calculated_total": 2459.3,
+    "math_discrepancy": 0.0,
+    "date_swap_applied": true
+  },
+  {
+    "file": "data/samples/synthetic/statement_04_both_errors.pdf",
+    "bank_name": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2339.3,
+    "calculated_total": 2459.3,
+    "math_discrepancy": -120.0,
+    "date_swap_applied": true
+  }
+]

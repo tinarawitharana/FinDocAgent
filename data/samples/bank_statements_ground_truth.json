@@ -1,0 +1,56 @@
+[
+  {
+    "file": "data/samples/bs1.pdf",
+    "source": "TemplateLab-style itemized statement, manually filled in by author",
+    "stated_total": 4988.57,
+    "calculated_total": 4023.57,
+    "math_discrepancy": 965.0,
+    "date_swap_applied": false,
+    "notes": "Math discrepancy confirmed by author: displayed total (4988.57) does not match the true sum of line items (4023.57)."
+  },
+  {
+    "file": "data/samples/bs2.pdf",
+    "source": "BNI-style itemized statement, manually filled in by author",
+    "stated_total": 31678.69,
+    "calculated_total": 31828.69,
+    "math_discrepancy": -150.0,
+    "date_swap_applied": false,
+    "notes": "One credit line item changed from 20,000.00 to 20,150.00 without updating the header Closing Balance (31,678.69), which now differs from the true sum of line items (31,828.69) by exactly 150.00."
+  },
+  {
+    "file": "data/samples/bs3.pdf",
+    "source": "Bickslow Bank-style itemized statement, manually filled in by author",
+    "stated_total": 5799.64,
+    "calculated_total": 5799.64,
+    "math_discrepancy": 0.0,
+    "date_swap_applied": true,
+    "notes": "Math confirmed clean (reconciles exactly). Two out-of-order date pairs present: row 3->4 (02/04 then 02/01) and row 8->9 (02/12 then 02/11)."
+  },
+  {
+    "file": "data/samples/bs4.pdf",
+    "source": "First Citizens Bank-style itemized statement, manually filled in by author",
+    "stated_total": 590800.0,
+    "calculated_total": 591800.0,
+    "math_discrepancy": -1000.0,
+    "date_swap_applied": true,
+    "notes": "Displayed total (590,800) does not match the true sum of credit/debit rows against the opening balance (591,800), confirmed by author. One out-of-order date pair: row 3->4 (11/29 then 11/23)."
+  },
+  {
+    "file": "data/samples/bs5.pdf",
+    "source": "Stock 'Bank Statement Example' image found online, not filled in by author",
+    "stated_total": 44079.83,
+    "calculated_total": 44079.83,
+    "math_discrepancy": 0.0,
+    "date_swap_applied": false,
+    "notes": "Math confirmed clean by author. Not a fillable form like the others - sourced as a pre-made example image. No documented anomaly."
+  },
+  {
+    "file": "data/samples/bank_statement_anomaly_word.pdf",
+    "source": "Original hand-crafted HSBC-style statement (real text layer)",
+    "stated_total": 2139.27,
+    "calculated_total": 4325.96,
+    "math_discrepancy": -2186.69,
+    "date_swap_applied": true,
+    "notes": "Validated earlier in this project: math discrepancy of -2186.69 and 2 out-of-order dates both correctly detected by the anomaly_checker pipeline."
+  }
+]

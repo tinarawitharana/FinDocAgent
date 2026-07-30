@@ -1,0 +1,7 @@
+doc_id,document_type,file_reference,question_or_context,model_output,rater,localization_score,clarity_score,actionability_score,trust_score,shap_consistency_score,correctness_score,comments
+sec10k_01,SEC 10-K page,,,,Tinara,,,,,,,
+sec10k_01,SEC 10-K page,,,,Friend,,,,,,,
+sec10k_02,SEC 10-K page,,,,Tinara,,,,,,,
+sec10k_02,SEC 10-K page,,,,Friend,,,,,,,
+bankstmt_01,Bank Statement,,,,Tinara,,,,,,,
+bankstmt_01,Bank Statement,,,,Friend,,,,,,,

@@ -21,11 +21,9 @@ anomalies Detected: {len(anomalies)}
     """
 
     for a in anomalies:
-        report += f"\n- {a['type']}: Stated £{a['stated']} vs Calculated £{a['calculated']} (Difference: £{a['difference']})"
-
-    #dummy
-    print(report)
-    state['risk_report'] = report
-    state['task_complete'] = True
-
-    return state
+        if a["type"] == "math_discrepancy":
+            report += f"\n- {a['type']}: Stated £{a['stated']} vs Calculated £{a['calculated']} (Difference: £{a['difference']})"
+        elif a["type"] == "date_ordering":
+            report += f"\n- {a['type']}: {a['out_of_order_count']} out-of-order date(s) found in line items"
+        else:
+            report += f"\n- {a['type']}: {a}"

@@ -59,10 +59,11 @@ def extract_fields_from_document(pdf_path):
 "stated_total": <total amount as a number only, no currency symbol>,
 "currency": "currency symbo, or code",
 "statement_date": "date if present, else null",
-"line_items": [{"description": "...", "amount": <number>}]
+"line_items": [{"description": "...", "amount": <number>, "date": "YYYY-MM-DD if present, else null"}]
 }
 
 Return only valid JSON, nothing else."""
+
                     }
                 ]
             }

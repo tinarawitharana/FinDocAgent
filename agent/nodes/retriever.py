@@ -14,8 +14,17 @@ def retriever_node(state: AgentState) -> AgentState:
     ext = os.path.splitext(document_path)[1].lower()
 
     if ext in IMAGE_EXTENSIONS:
-        #img input 
+        #img input
         print(f"[RETRIEVER] Image file detected, skipping text retrievel.")
+        state["retrieved_chunks"] = [document_path]
+        state["iteration_count"] += 1
+
+        return state
+
+    if not state.get("question"):
+        #bank-statement / PDF-extraction mode — extractor reads the PDF directly via Qwen2-VL,
+        #never touches retrieved_chunks, so there's nothing for retrieval to do here
+        print(f"[RETRIEVER] No question set, skipping RAG retrieval (PDF-extraction mode).")
         state["retrieved_chunks"] = [document_path]
         state["iteration_count"] += 1
 
