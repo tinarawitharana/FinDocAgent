@@ -1,0 +1,18 @@
+{
+  "docvqa": {
+    "total": 50,
+    "already_ok": 42,
+    "verbose_correct": 4,
+    "genuine_miss": 4,
+    "raw_anls": 0.803,
+    "adjusted_anls": 0.883
+  },
+  "funsd": {
+    "total_gt_fields": 809,
+    "already_ok": 665,
+    "verbose_correct": 34,
+    "genuine_miss": 110,
+    "raw_anls": 0.727,
+    "adjusted_anls": 0.782
+  }
+}

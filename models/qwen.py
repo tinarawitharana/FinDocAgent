@@ -59,10 +59,12 @@ def extract_fields_from_document(pdf_path):
 "stated_total": <total amount as a number only, no currency symbol>,
 "currency": "currency symbo, or code",
 "statement_date": "date if present, else null",
-"line_items": [{"description": "...", "amount": <number>, "date": "YYYY-MM-DD if present, else null"}]
+"opening_balance": <the starting/opening balance shown in the document's header or summary, as a positive number. Use 0 if this document has no running balance (e.g. a credit card "total amount due" style statement with no opening balance concept)>,
+"line_items": [{"description": "...", "amount": <the number as printed, always positive>, "date": "YYYY-MM-DD if present, else null", "type": "credit if this is money in / paid in / a deposit, debit if this is money out / paid out / a withdrawal. If the document has separate Credit and Debit (or Paid In and Paid Out) columns, use whichever column this row's amount appears in. Do NOT include an opening balance or balance-brought-forward row here - put that value in the separate opening_balance field instead."}]
 }
 
 Return only valid JSON, nothing else."""
+
 
                     }
                 ]

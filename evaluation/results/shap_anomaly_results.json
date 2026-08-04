@@ -1,6 +1,6 @@
 [
   {
-    "pdf": "data/samples/bank_statement_clean.pdf",
+    "pdf": "data/samples/synthetic/statement_01_clean.pdf",
     "math_feature": 0.0,
     "date_feature": 0.0,
     "composite_score": 0.0,
@@ -8,43 +8,75 @@
     "shap_date_feature": 0.0
   },
   {
-    "pdf": "data/samples/bank_statement_clean_word.pdf",
-    "math_feature": 1.0,
+    "pdf": "data/samples/synthetic/statement_02_math_error.pdf",
+    "math_feature": 0.09227475731738825,
     "date_feature": 0.0,
-    "composite_score": 0.5,
-    "shap_math_feature": 0.5,
+    "composite_score": 0.04613737865869413,
+    "shap_math_feature": 0.04613737865869413,
     "shap_date_feature": 0.0
   },
   {
-    "pdf": "data/samples/bank_statement_anomaly.pdf",
-    "math_feature": 0.9357257382191121,
+    "pdf": "data/samples/synthetic/statement_03_date_error.pdf",
+    "math_feature": 0.0,
+    "date_feature": 0.4,
+    "composite_score": 0.2,
+    "shap_math_feature": 0.0,
+    "shap_date_feature": 0.2
+  },
+  {
+    "pdf": "data/samples/synthetic/statement_04_both_errors.pdf",
+    "math_feature": 0.051297396657119645,
+    "date_feature": 0.4,
+    "composite_score": 0.22564869832855983,
+    "shap_math_feature": 0.025648698328559816,
+    "shap_date_feature": 0.2
+  },
+  {
+    "pdf": "data/samples/bs1.pdf",
+    "math_feature": 0.21849948983375989,
     "date_feature": 0.0,
-    "composite_score": 0.46786286910955605,
-    "shap_math_feature": 0.46786286910955605,
+    "composite_score": 0.10924974491687994,
+    "shap_math_feature": 0.10924974491687994,
+    "shap_date_feature": 0.0
+  },
+  {
+    "pdf": "data/samples/bs2.pdf",
+    "math_feature": 0.022480975497263547,
+    "date_feature": 0.0,
+    "composite_score": 0.011240487748631773,
+    "shap_math_feature": 0.011240487748631773,
+    "shap_date_feature": 0.0
+  },
+  {
+    "pdf": "data/samples/bs3.pdf",
+    "math_feature": 1.5681916494350134e-16,
+    "date_feature": 0.125,
+    "composite_score": 0.06250000000000008,
+    "shap_math_feature": 0.0,
+    "shap_date_feature": 0.06250000000000008
+  },
+  {
+    "pdf": "data/samples/bs4.pdf",
+    "math_feature": 0.0016926201760324984,
+    "date_feature": 0.14285714285714285,
+    "composite_score": 0.07227488151658767,
+    "shap_math_feature": 0.00084631008801625,
+    "shap_date_feature": 0.07142857142857142
+  },
+  {
+    "pdf": "data/samples/bs5.pdf",
+    "math_feature": 0.0,
+    "date_feature": 0.0,
+    "composite_score": 0.0,
+    "shap_math_feature": 0.0,
     "shap_date_feature": 0.0
   },
   {
     "pdf": "data/samples/bank_statement_anomaly_word.pdf",
-    "math_feature": 1.0,
-    "date_feature": 0.2,
-    "composite_score": 0.6,
-    "shap_math_feature": 0.5,
-    "shap_date_feature": 0.09999999999999998
-  },
-  {
-    "pdf": "data/samples/hsbc1.pdf",
-    "math_feature": 0.0020707998522861964,
-    "date_feature": 0.2,
-    "composite_score": 0.1010353999261431,
-    "shap_math_feature": 0.001035399926143099,
-    "shap_date_feature": 0.1
-  },
-  {
-    "pdf": "data/samples/hsbc_anomaly.pdf",
-    "math_feature": 0.9357257382191121,
-    "date_feature": 0.2,
-    "composite_score": 0.5678628691095561,
-    "shap_math_feature": 0.4678628691095561,
-    "shap_date_feature": 0.09999999999999998
+    "math_feature": 0.8774254769150224,
+    "date_feature": 0.25,
+    "composite_score": 0.5637127384575111,
+    "shap_math_feature": 0.43871273845751113,
+    "shap_date_feature": 0.125
   }
 ]

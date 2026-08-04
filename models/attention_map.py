@@ -1,8 +1,8 @@
 import os
 import torch
-import numpy as np 
-from PIL import Image 
-import matplotlib.pyplot as plt 
+import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
@@ -56,35 +56,42 @@ def generate_attention_map(pil_image, question, save_path=None):
         return_tensors="pt"
     ).to(model.device)
 
-    # step 1: generate answer (no attention stored — saves memory)
+    # generate the answer AND ask generate() to return attention weights for each step —
+    # this avoids a separate second forward pass, which conflicts with Qwen2-VL's internal
+    # rope_deltas caching if you try to re-run the model on the concatenated sequence yourself.
+    # It's also cheaper: thanks to KV-caching, only the first generation step computes full
+    # attention over the whole image; every later step is much smaller.
     with torch.no_grad():
-        gen_ids = model.generate(
+        gen_outputs = model.generate(
             **inputs,
-            max_new_tokens=20,
-            do_sample=False
+            max_new_tokens=80,
+            do_sample=False,
+            output_attentions=True,
+            return_dict_in_generate=True
         )
 
-    answer = processor.batch_decode(
+    gen_ids = gen_outputs.sequences
+
+    raw_output = processor.batch_decode(
         gen_ids[:, inputs["input_ids"].shape[1]:],
         skip_special_tokens=True
     )[0].strip()
 
+    if "ANSWER:" in raw_output:
+        answer = raw_output.split("ANSWER:")[-1].strip()
+    else:
+        answer = raw_output
+
     print(f"[ATTENTION] Answer: {answer}")
 
-    # step 2: forward pass on full sequence (input + answer) to extract attention
-    with torch.no_grad():
-        outputs = model(
-            **inputs,
-            output_attentions=True
-        )
+    # attention from the last generated token (end of the answer), last layer,
+    # looking back over the full sequence (image + prompt + reasoning + answer so far)
+    last_layer_attn = gen_outputs.attentions[-1][-1]   # (batch, heads, 1, seq_len_so_far)
+    avg_attn = last_layer_attn[0].mean(dim=0)          # (1, seq_len_so_far)
+    last_token_attn = avg_attn[0, :]                   # (seq_len_so_far,)
 
-    # step 3: extract attention from last layer, last token → image tokens
-    last_layer_attn = outputs.attentions[-1]        # (batch, heads, seq_len, seq_len)
-    avg_attn = last_layer_attn[0].mean(dim=0)       # (seq_len, seq_len)
-    last_token_attn = avg_attn[-1, :]               # last token attending to all positions
-
-    # find image token positions in original input
-    orig_input_ids = inputs["input_ids"][0]
+    # find image token positions in the full generated sequence
+    orig_input_ids = gen_ids[0]
     image_positions = (orig_input_ids == IMAGE_PAD_TOKEN_ID).nonzero(as_tuple=True)[0]
 
     if len(image_positions) == 0:
@@ -125,9 +132,13 @@ def generate_attention_map(pil_image, question, save_path=None):
     axes[1].set_title("Attention Map", fontsize=12)
     axes[1].axis("off")
 
+    # escape literal $ so matplotlib doesn't try to parse it as math notation
+    safe_question = question[:60].replace("$", "\\$")
+    safe_answer = answer.replace("$", "\\$")
+
     axes[2].imshow(pil_image)
     axes[2].imshow(attn_resized, cmap="hot", alpha=0.5)
-    axes[2].set_title(f"Q: {question[:60]}\nA: {answer}", fontsize=10)
+    axes[2].set_title(f"Q: {safe_question}\nA: {safe_answer}", fontsize=10)
     axes[2].axis("off")
 
     plt.tight_layout()

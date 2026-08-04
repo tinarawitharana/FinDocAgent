@@ -1,10 +1,21 @@
 from agent.state import AgentState
 
 
+def _signed_amount(item):
+    amount = item.get("amount", 0)
+    item_type = (item.get("type") or "").strip().lower()
+    if item_type == "debit":
+        return -abs(amount)
+    elif item_type == "credit":
+        return abs(amount)
+    return amount
+
+
 def compute_anomaly_features(fields):
     stated = fields.get("stated_total", 0)
-    calculated = sum(item["amount"] for item in fields.get("line_items", []))
-    difference = stated - calculated
+    opening_balance = fields.get("opening_balance", 0)
+    calculated = opening_balance + sum(_signed_amount(item) for item in fields.get("line_items", []))
+    difference = abs(stated) - abs(calculated)
     math_feature = min(abs(difference) / max(abs(stated), 1), 1.0)
 
     dates = [item.get("date") for item in fields.get("line_items", []) if item.get("date")]

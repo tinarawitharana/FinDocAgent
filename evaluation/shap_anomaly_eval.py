@@ -6,17 +6,9 @@ import numpy as np
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import shap
-from models.qwen import extract_fields_from_document
 from agent.nodes.anomaly_checker import compute_anomaly_features, anomaly_score
 
-BANK_STATEMENT_PDFS = [
-    "data/samples/bank_statement_clean.pdf",
-    "data/samples/bank_statement_clean_word.pdf",
-    "data/samples/bank_statement_anomaly.pdf",
-    "data/samples/bank_statement_anomaly_word.pdf",
-    "data/samples/hsbc1.pdf",
-    "data/samples/hsbc_anomaly.pdf",
-]
+EXTRACTED_FIELDS_PATH = "data/samples/bank_statements_extracted.json"
 
 def score_fn(X):
     return np.array([
@@ -25,14 +17,16 @@ def score_fn(X):
     ])
 
 def run_shap_eval():
-    background = np.zeros((1, 2))  # "clean document" baseline: no anomalies at all
+    with open(EXTRACTED_FIELDS_PATH) as f:
+        extracted_fields = json.load(f)
+
+    background = np.zeros((1, 2))
     explainer = shap.KernelExplainer(score_fn, background)
 
     results = []
 
-    for pdf_path in BANK_STATEMENT_PDFS:
+    for pdf_path, fields in extracted_fields.items():
         print(f"\nProcessing {pdf_path}...")
-        fields = extract_fields_from_document(pdf_path)
         features = compute_anomaly_features(fields)
 
         X = np.array([[features["math_feature"], features["date_feature"]]])

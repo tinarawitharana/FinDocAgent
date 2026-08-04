@@ -1,0 +1,646 @@
+{
+  "data/samples/synthetic/statement_01_clean.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2459.3,
+    "currency": "USD",
+    "statement_date": null,
+    "opening_balance": 500.0,
+    "line_items": [
+      {
+        "description": "Grocery Store",
+        "amount": 45.2,
+        "date": "2024-01-03",
+        "type": "debit"
+      },
+      {
+        "description": "Salary Payment",
+        "amount": 2000.0,
+        "date": "2024-01-05",
+        "type": "credit"
+      },
+      {
+        "description": "Electricity Bill",
+        "amount": 80.0,
+        "date": "2024-01-08",
+        "type": "debit"
+      },
+      {
+        "description": "Restaurant",
+        "amount": 35.5,
+        "date": "2024-01-10",
+        "type": "debit"
+      },
+      {
+        "description": "Transfer In",
+        "amount": 150.0,
+        "date": "2024-01-12",
+        "type": "credit"
+      },
+      {
+        "description": "Gym Membership",
+        "amount": 30.0,
+        "date": "2024-01-15",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/synthetic/statement_02_math_error.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2709.3,
+    "currency": "USD",
+    "statement_date": null,
+    "opening_balance": 500.0,
+    "line_items": [
+      {
+        "description": "Grocery Store",
+        "amount": 45.2,
+        "date": "2024-01-03",
+        "type": "debit"
+      },
+      {
+        "description": "Salary Payment",
+        "amount": 2000.0,
+        "date": "2024-01-05",
+        "type": "credit"
+      },
+      {
+        "description": "Electricity Bill",
+        "amount": 80.0,
+        "date": "2024-01-08",
+        "type": "debit"
+      },
+      {
+        "description": "Restaurant",
+        "amount": 35.5,
+        "date": "2024-01-10",
+        "type": "debit"
+      },
+      {
+        "description": "Transfer In",
+        "amount": 150.0,
+        "date": "2024-01-12",
+        "type": "credit"
+      },
+      {
+        "description": "Gym Membership",
+        "amount": 30.0,
+        "date": "2024-01-15",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/synthetic/statement_03_date_error.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2459.3,
+    "currency": "USD",
+    "statement_date": null,
+    "opening_balance": 500.0,
+    "line_items": [
+      {
+        "description": "Grocery Store",
+        "amount": 45.2,
+        "date": "2024-01-03",
+        "type": "debit"
+      },
+      {
+        "description": "Salary Payment",
+        "amount": 2000.0,
+        "date": "2024-01-10",
+        "type": "credit"
+      },
+      {
+        "description": "Electricity Bill",
+        "amount": 80.0,
+        "date": "2024-01-08",
+        "type": "debit"
+      },
+      {
+        "description": "Restaurant",
+        "amount": 35.5,
+        "date": "2024-01-05",
+        "type": "debit"
+      },
+      {
+        "description": "Transfer In",
+        "amount": 150.0,
+        "date": "2024-01-12",
+        "type": "credit"
+      },
+      {
+        "description": "Gym Membership",
+        "amount": 30.0,
+        "date": "2024-01-15",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/synthetic/statement_04_both_errors.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "Metro Bank",
+    "account_holder": "Alex Carter",
+    "stated_total": 2339.3,
+    "currency": "USD",
+    "statement_date": null,
+    "opening_balance": 500.0,
+    "line_items": [
+      {
+        "description": "Grocery Store",
+        "amount": 45.2,
+        "date": "2024-01-12",
+        "type": "debit"
+      },
+      {
+        "description": "Salary Payment",
+        "amount": 2000.0,
+        "date": "2024-01-05",
+        "type": "credit"
+      },
+      {
+        "description": "Electricity Bill",
+        "amount": 80.0,
+        "date": "2024-01-08",
+        "type": "debit"
+      },
+      {
+        "description": "Restaurant",
+        "amount": 35.5,
+        "date": "2024-01-10",
+        "type": "debit"
+      },
+      {
+        "description": "Transfer In",
+        "amount": 150.0,
+        "date": "2024-01-03",
+        "type": "credit"
+      },
+      {
+        "description": "Gym Membership",
+        "amount": 30.0,
+        "date": "2024-01-15",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/bs1.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "Los Angeles",
+    "account_holder": "John Smith",
+    "stated_total": 4988.57,
+    "currency": "USD",
+    "statement_date": "2021-03-01",
+    "opening_balance": 0,
+    "line_items": [
+      {
+        "description": "Petron - C5 Station",
+        "amount": 223.26,
+        "date": "2021-03-02",
+        "type": "debit"
+      },
+      {
+        "description": "South Star Drug",
+        "amount": 313.39,
+        "date": "2021-03-04",
+        "type": "debit"
+      },
+      {
+        "description": "Rosewood Condominum",
+        "amount": 582.96,
+        "date": "2021-03-04",
+        "type": "debit"
+      },
+      {
+        "description": "Grab",
+        "amount": 125,
+        "date": "2021-03-07",
+        "type": "debit"
+      },
+      {
+        "description": "Amazon",
+        "amount": 215,
+        "date": "2021-03-13",
+        "type": "debit"
+      },
+      {
+        "description": "Alba International",
+        "amount": 656.86,
+        "date": "2021-03-14",
+        "type": "debit"
+      },
+      {
+        "description": "Adobe Sales",
+        "amount": 246,
+        "date": "2021-03-15",
+        "type": "debit"
+      },
+      {
+        "description": "St. Luke Medical Center",
+        "amount": 571.1,
+        "date": "2021-03-16",
+        "type": "debit"
+      },
+      {
+        "description": "Hotel Sheraton (Las Vegas)",
+        "amount": 965,
+        "date": "2021-03-18",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/bs2.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "bnibank@domain.com",
+    "account_holder": "John Smith",
+    "stated_total": 31828.69,
+    "currency": "USD",
+    "statement_date": null,
+    "opening_balance": 10895.92,
+    "line_items": [
+      {
+        "description": "Account Interest",
+        "amount": 19.95,
+        "date": "2024-01-01",
+        "type": "credit"
+      },
+      {
+        "description": "Branch Deposit",
+        "amount": 20000,
+        "date": "2024-01-03",
+        "type": "credit"
+      },
+      {
+        "description": "Branch Deposit",
+        "amount": 600,
+        "date": "2024-01-05",
+        "type": "credit"
+      },
+      {
+        "description": "Branch Deposit",
+        "amount": 630,
+        "date": "2024-01-06",
+        "type": "credit"
+      },
+      {
+        "description": "Branch Cheque - MC Kean & Park",
+        "amount": 1430,
+        "date": "2024-01-08",
+        "type": "debit"
+      },
+      {
+        "description": "Cost of Bank Cheque",
+        "amount": 100,
+        "date": "2024-01-10",
+        "type": "debit"
+      },
+      {
+        "description": "Branch Deposit",
+        "amount": 500,
+        "date": "2024-01-12",
+        "type": "credit"
+      },
+      {
+        "description": "FED Bank Account Debits Tax",
+        "amount": 1.05,
+        "date": "2024-01-14",
+        "type": "debit"
+      },
+      {
+        "description": "VIC FID Charge",
+        "amount": 1.67,
+        "date": "2024-01-15",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/bs3.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "Bickslow Bank",
+    "account_holder": "Bit Manufacturing Ltd",
+    "stated_total": 5799.64,
+    "currency": "USD",
+    "statement_date": "2025-02-30",
+    "opening_balance": 8313.3,
+    "line_items": [
+      {
+        "description": "Amazon",
+        "amount": 132.3,
+        "date": "2025-02-01",
+        "type": "debit"
+      },
+      {
+        "description": "eBAY Trading Co.",
+        "amount": 515.22,
+        "date": "2025-02-01",
+        "type": "debit"
+      },
+      {
+        "description": "Morrisons Petrol",
+        "amount": 80,
+        "date": "2025-02-04",
+        "type": "debit"
+      },
+      {
+        "description": "Business Loan",
+        "amount": 20000,
+        "date": "2025-02-01",
+        "type": "credit"
+      },
+      {
+        "description": "Jumes White Media",
+        "amount": 2416.85,
+        "date": "2025-02-05",
+        "type": "debit"
+      },
+      {
+        "description": "ATM High Street",
+        "amount": 100,
+        "date": "2025-02-05",
+        "type": "debit"
+      },
+      {
+        "description": "Accorn Advertising Studios",
+        "amount": 150,
+        "date": "2025-02-09",
+        "type": "debit"
+      },
+      {
+        "description": "Marriott Hotels",
+        "amount": 177,
+        "date": "2025-02-12",
+        "type": "debit"
+      },
+      {
+        "description": "Abelio Sootrail Ltd",
+        "amount": 122.22,
+        "date": "2025-02-11",
+        "type": "debit"
+      },
+      {
+        "description": "Cheque 000234",
+        "amount": 1200,
+        "date": "2025-02-12",
+        "type": "debit"
+      },
+      {
+        "description": "Interest Paid",
+        "amount": 9.33,
+        "date": "2025-02-14",
+        "type": "credit"
+      },
+      {
+        "description": "OVO Energy",
+        "amount": 270,
+        "date": "2025-02-16",
+        "type": "debit"
+      },
+      {
+        "description": "Toyota Online",
+        "amount": 10525.4,
+        "date": "2025-02-19",
+        "type": "debit"
+      },
+      {
+        "description": "HMRC",
+        "amount": 1000,
+        "date": "2025-02-23",
+        "type": "debit"
+      },
+      {
+        "description": "OVLA",
+        "amount": 280,
+        "date": "2025-02-23",
+        "type": "debit"
+      },
+      {
+        "description": "Michael Kor Salary",
+        "amount": 1554,
+        "date": "2025-02-26",
+        "type": "debit"
+      },
+      {
+        "description": "BOS Mastercard",
+        "amount": 4000,
+        "date": "2025-02-28",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/bs4.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "First Citizens Bank",
+    "account_holder": "John Smith",
+    "stated_total": 590800,
+    "currency": "USD",
+    "statement_date": "2023-12-31",
+    "opening_balance": 175800,
+    "line_items": [
+      {
+        "description": "Payment - Credit Card",
+        "amount": 5400,
+        "date": "2023-11-20",
+        "type": "debit"
+      },
+      {
+        "description": "Payment - Insurance",
+        "amount": 3000,
+        "date": "2023-11-21",
+        "type": "debit"
+      },
+      {
+        "description": "Account Transfer In",
+        "amount": 500000,
+        "date": "2023-11-29",
+        "type": "credit"
+      },
+      {
+        "description": "Cheque Deposit",
+        "amount": 10000,
+        "date": "2023-11-23",
+        "type": "credit"
+      },
+      {
+        "description": "Payment - Electricity",
+        "amount": 1500,
+        "date": "2023-11-23",
+        "type": "debit"
+      },
+      {
+        "description": "Payment - Water Utility",
+        "amount": 600,
+        "date": "2023-12-02",
+        "type": "debit"
+      },
+      {
+        "description": "Payment - Car Loan",
+        "amount": 3500,
+        "date": "2023-12-14",
+        "type": "debit"
+      },
+      {
+        "description": "Account Transfer Out",
+        "amount": 80000,
+        "date": "2023-12-29",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/bs5.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "YourBank",
+    "account_holder": "Mr John Smith",
+    "stated_total": 44079.83,
+    "currency": "GBP",
+    "statement_date": "2019-02-01 to 2019-03-01",
+    "opening_balance": 40000,
+    "line_items": [
+      {
+        "description": "Cardpayment - High St Petrol Station",
+        "amount": 24.5,
+        "date": "2019-02-01",
+        "type": "debit"
+      },
+      {
+        "description": "Direct debit - Green Mobile Phone Bill",
+        "amount": 20,
+        "date": "2019-02-01",
+        "type": "debit"
+      },
+      {
+        "description": "Cash Withdrawal - YourBank, Anytown High Street, timed 17:30 31 Jan",
+        "amount": 30,
+        "date": "2019-02-03",
+        "type": "debit"
+      },
+      {
+        "description": "YourJob BiWeekly Payment",
+        "amount": 2575,
+        "date": "2019-02-04",
+        "type": "credit"
+      },
+      {
+        "description": "Direct Deposit - YourBank, Anytown High Street, timed 17:30 31 Jan",
+        "amount": 300,
+        "date": "2019-02-11",
+        "type": "credit"
+      },
+      {
+        "description": "Cash Withdrawal - RandomBank, Randomford, timed 9.52 14 Feb",
+        "amount": 50,
+        "date": "2019-02-16",
+        "type": "debit"
+      },
+      {
+        "description": "Card payment - High St Petrol Station",
+        "amount": 40,
+        "date": "2019-02-17",
+        "type": "debit"
+      },
+      {
+        "description": "Direct Debit - Home Insurance",
+        "amount": 78.34,
+        "date": "2019-02-17",
+        "type": "debit"
+      },
+      {
+        "description": "YourJob BiWeekly Payment",
+        "amount": 2575,
+        "date": "2019-02-18",
+        "type": "credit"
+      },
+      {
+        "description": "Randomford's Deli",
+        "amount": 15,
+        "date": "2019-02-18",
+        "type": "debit"
+      },
+      {
+        "description": "Anytown's Jewelers",
+        "amount": 150,
+        "date": "2019-02-24",
+        "type": "debit"
+      },
+      {
+        "description": "Direct Deposit",
+        "amount": 25,
+        "date": "2019-02-24",
+        "type": "credit"
+      },
+      {
+        "description": "Monthly Apartment Rent",
+        "amount": 987.33,
+        "date": "2019-02-28",
+        "type": "debit"
+      }
+    ]
+  },
+  "data/samples/bank_statement_anomaly_word.pdf": {
+    "document_type": "bank statement",
+    "vendor_or_bank": "HSBC UK",
+    "account_holder": "Mr Toby Grant",
+    "stated_total": 2139.27,
+    "currency": "GBP",
+    "statement_date": "2023-11-25 to 2023-12-02",
+    "opening_balance": 0.57,
+    "line_items": [
+      {
+        "description": "Telephone Bill payment",
+        "amount": 152.71,
+        "date": "2023-11-26",
+        "type": "debit"
+      },
+      {
+        "description": "DHL delivery services",
+        "amount": 122.71,
+        "date": "2023-11-27",
+        "type": "debit"
+      },
+      {
+        "description": "Cheque Deposit",
+        "amount": 425.23,
+        "date": "2023-12-28",
+        "type": "credit"
+      },
+      {
+        "description": "Jessica George",
+        "amount": 500.0,
+        "date": "2023-11-29",
+        "type": "credit"
+      },
+      {
+        "description": "Shell 2-4 NEW CROSS ROAD",
+        "amount": 202.34,
+        "date": "2023-11-29",
+        "type": "debit"
+      },
+      {
+        "description": "Pizza Union Hoxton",
+        "amount": 15.13,
+        "date": "2023-11-29",
+        "type": "debit"
+      },
+      {
+        "description": "Uber",
+        "amount": 28.9,
+        "date": "2023-12-30",
+        "type": "debit"
+      },
+      {
+        "description": "British Gas Payment",
+        "amount": 659.23,
+        "date": "2023-12-01",
+        "type": "debit"
+      },
+      {
+        "description": "Costa Cofee",
+        "amount": 7.0,
+        "date": "2023-12-02",
+        "type": "debit"
+      }
+    ]
+  }
+}
