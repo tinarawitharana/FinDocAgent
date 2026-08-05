@@ -27,3 +27,7 @@ anomalies Detected: {len(anomalies)}
             report += f"\n- {a['type']}: {a['out_of_order_count']} out-of-order date(s) found in line items"
         else:
             report += f"\n- {a['type']}: {a}"
+
+    state["risk_report"] = report
+    state["task_complete"] = True
+    return state

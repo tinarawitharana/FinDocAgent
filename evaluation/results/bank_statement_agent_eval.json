@@ -1,0 +1,242 @@
+{
+  "num_documents": 10,
+  "math_discrepancy_metrics": {
+    "tp": 6,
+    "fp": 4,
+    "fn": 0,
+    "tn": 0,
+    "precision": 0.6,
+    "recall": 1.0,
+    "f1": 0.75
+  },
+  "date_ordering_metrics": {
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "tn": 5,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "any_anomaly_metrics": {
+    "tp": 8,
+    "fp": 2,
+    "fn": 0,
+    "tn": 0,
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.889
+  },
+  "per_document": [
+    {
+      "file": "data/samples/synthetic/statement_01_clean.pdf",
+      "expected_math": false,
+      "predicted_math": true,
+      "expected_date": false,
+      "predicted_date": false,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 2459.3,
+          "calculated": 1959.3,
+          "difference": 500.0000000000002
+        }
+      ],
+      "time_seconds": 25.23,
+      "error": null,
+      "expected_any": false,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/synthetic/statement_02_math_error.pdf",
+      "expected_math": true,
+      "predicted_math": true,
+      "expected_date": false,
+      "predicted_date": false,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 2709.3,
+          "calculated": 1959.3,
+          "difference": 750.0000000000002
+        }
+      ],
+      "time_seconds": 8.77,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/synthetic/statement_03_date_error.pdf",
+      "expected_math": false,
+      "predicted_math": true,
+      "expected_date": true,
+      "predicted_date": true,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 2459.3,
+          "calculated": 1959.3,
+          "difference": 500.0000000000002
+        },
+        {
+          "type": "date_ordering",
+          "out_of_order_count": 2
+        }
+      ],
+      "time_seconds": 10.14,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/synthetic/statement_04_both_errors.pdf",
+      "expected_math": true,
+      "predicted_math": true,
+      "expected_date": true,
+      "predicted_date": true,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 2339.3,
+          "calculated": 1959.3,
+          "difference": 380.0000000000002
+        },
+        {
+          "type": "date_ordering",
+          "out_of_order_count": 2
+        }
+      ],
+      "time_seconds": 9.05,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/bs1.pdf",
+      "expected_math": true,
+      "predicted_math": true,
+      "expected_date": false,
+      "predicted_date": false,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 4988.57,
+          "calculated": -3898.57,
+          "difference": 1089.9999999999995
+        }
+      ],
+      "time_seconds": 13.02,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/bs2.pdf",
+      "expected_math": true,
+      "predicted_math": true,
+      "expected_date": false,
+      "predicted_date": false,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 31828.69,
+          "calculated": 20217.23,
+          "difference": 11611.46
+        }
+      ],
+      "time_seconds": 13.21,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/bs3.pdf",
+      "expected_math": false,
+      "predicted_math": true,
+      "expected_date": true,
+      "predicted_date": true,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 5799.64,
+          "calculated": -2513.66,
+          "difference": 3285.9800000000005
+        },
+        {
+          "type": "date_ordering",
+          "out_of_order_count": 2
+        }
+      ],
+      "time_seconds": 27.62,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/bs4.pdf",
+      "expected_math": true,
+      "predicted_math": true,
+      "expected_date": true,
+      "predicted_date": true,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 590800.0,
+          "calculated": 416000,
+          "difference": 174800.0
+        },
+        {
+          "type": "date_ordering",
+          "out_of_order_count": 1
+        }
+      ],
+      "time_seconds": 11.41,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/bs5.pdf",
+      "expected_math": false,
+      "predicted_math": true,
+      "expected_date": false,
+      "predicted_date": false,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 44079.83,
+          "calculated": 4079.83,
+          "difference": 40000.0
+        }
+      ],
+      "time_seconds": 20.68,
+      "error": null,
+      "expected_any": false,
+      "predicted_any": true
+    },
+    {
+      "file": "data/samples/bank_statement_anomaly_word.pdf",
+      "expected_math": true,
+      "predicted_math": true,
+      "expected_date": true,
+      "predicted_date": true,
+      "anomalies": [
+        {
+          "type": "math_discrepancy",
+          "stated": 2139.27,
+          "calculated": 1949.35,
+          "difference": 189.92000000000007
+        },
+        {
+          "type": "date_ordering",
+          "out_of_order_count": 2
+        }
+      ],
+      "time_seconds": 14.43,
+      "error": null,
+      "expected_any": true,
+      "predicted_any": true
+    }
+  ]
+}
