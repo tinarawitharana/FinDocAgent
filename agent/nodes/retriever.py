@@ -1,3 +1,14 @@
+"""Retriever node: the first step of the agent graph.
+
+Behavior depends on the document/mode:
+  - Image input: passed straight through, nothing to retrieve.
+  - Bank-statement mode (no question): passed straight through — the extractor reads
+    the whole PDF directly via Qwen2-VL rather than retrieving specific chunks.
+  - Document-QA/RAG mode (question set): indexes the PDF into ChromaDB on first use,
+    then retrieves the most relevant pages via hybrid dense + BM25 search and rasterizes
+    them to images for the vision-language extractor.
+"""
+
 from agent.state import AgentState
 from document_parser.parser import extract_text_with_positions
 import os
@@ -50,6 +61,9 @@ def retriever_node(state: AgentState) -> AgentState:
     #seach for key financial info - dummy query for now
     query = state.get("question") or "Total amount due line items transactions"
 
+    # On retries (see should_continue in graph.py), reformulate the query with different
+    # framing to surface pages missed on the previous attempt — first retry biases toward
+    # tabular/financial-statement pages, later retries toward narrative/text pages.
     if state.get("question") and state["iteration_count"] == 1:
         query = f"financial statement table annual report: {state['question']}"
 

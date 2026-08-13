@@ -1,8 +1,17 @@
+"""PDF parsing utilities: text/table/word-position extraction (pdfplumber) and page
+rasterization to PNG (pdf2image), used by the retriever and vector store."""
+
 import pdfplumber
 from pdf2image import convert_from_path
 import os
 
 def extract_text_with_positions(pdf_path):
+    """Extracts per-page text, tables, and word bounding boxes from a PDF.
+
+    Returns a list of per-page dicts with page dimensions, pdfplumber's raw `words`
+    (used for bounding-box lookups elsewhere), and `full_text` combining plain text
+    with pipe-delimited table rows.
+    """
     pages_data = []
 
     with pdfplumber.open(pdf_path) as pdf:
@@ -36,6 +45,7 @@ def extract_text_with_positions(pdf_path):
 
 
 def convert_pages_to_images(pdf_path, output_dir = "data/page_images", dpi=200):
+    """Rasterizes every page of a PDF to a PNG, returning the saved file paths."""
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -52,7 +62,7 @@ def convert_pages_to_images(pdf_path, output_dir = "data/page_images", dpi=200):
 
 if __name__ == "__main__":
 
-    #quick test
+    #quick manual smoke test
     test_pdf = "data/samples/bank_statement_clean_word.pdf"
 
     print ("Extracting text with positions...")

@@ -1,6 +1,9 @@
+"""Explainer node: the final step in bank-statement mode, formats a human-readable risk report."""
+
 from agent.state import AgentState
 
 def explainer_node(state: AgentState) -> AgentState:
+    """Writes a risk report from the accumulated anomalies and extracted fields, ending the run."""
     print(f"[EXPLAINER] Generating risk report based on anomalies and extracted fields...")
 
     anomalies = state["anomalies"]

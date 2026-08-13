@@ -1,3 +1,13 @@
+"""Builds the FinDocAgent LangGraph pipeline: retriever -> extractor -> anomaly_checker -> explainer.
+
+The graph runs in one of two modes, both driven by what's present in AgentState:
+  - Bank-statement mode (no `question`): extractor reads the PDF directly via Qwen2-VL,
+    anomaly_checker cross-checks totals/dates, explainer writes a risk report.
+  - Document-QA / RAG mode (`question` set): retriever indexes the document and retrieves
+    relevant pages, extractor answers the question from those pages, with up to 3 retries
+    if the model returns a "not found"-style non-answer.
+"""
+
 from langgraph.graph import StateGraph, END
 from agent.state import AgentState
 from agent.nodes.retriever import retriever_node
@@ -6,6 +16,7 @@ from agent.nodes.anomaly_checker import anomaly_checker_node
 from agent.nodes.explainer import explainer_node
 
 def should_continue(state: AgentState) -> str:
+    """Routes to the next node after the extractor, per the two modes described above."""
 
     # QA mode — check if answer needs a retry
     if state.get("question"):
@@ -31,6 +42,7 @@ def should_continue(state: AgentState) -> str:
     return "retriever"
 
 def build_graph():
+    """Assembles and compiles the FinDocAgent LangGraph state machine."""
     graph = StateGraph(AgentState)
 
     #add nodes

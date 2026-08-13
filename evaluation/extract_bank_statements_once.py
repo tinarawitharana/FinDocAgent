@@ -1,3 +1,7 @@
+"""One-off script: runs Qwen2-VL-max field extraction over all bank-statement PDFs once
+and caches the results to data/samples/bank_statements_extracted.json, so downstream
+evals (e.g. shap_anomaly_eval.py) can reuse the extractions without re-calling the API."""
+
 import os
 import sys
 import json

@@ -1,7 +1,7 @@
-"""Runs GPT-4o on the same FUNSD sample as funsd_eval.py, mirroring docvqa_gpt4o_eval.py's
-approach for the commercial-model baseline comparison."""
+"""Runs Kimi (Moonshot AI) on a FUNSD sample, mirroring docvqa_kimi_eval.py's approach."""
 
 import os
+import re
 import sys
 import json
 import time
@@ -11,13 +11,32 @@ import base64
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from datasets import load_dataset
-from openai import OpenAI
+from openai import OpenAI, RateLimitError
 from dotenv import load_dotenv
 from evaluation.metrics import anls_score
 
 load_dotenv(os.path.expanduser("~/.env"))
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(
+    api_key=os.getenv("KIMI_API_KEY"),
+    base_url="https://api.moonshot.ai/v1"
+)
+
+MODEL = "kimi-k3"
+
+# Tier0 (min $1 recharge) allows 3 requests/minute — confirmed via live 429 errors.
+SECONDS_BETWEEN_CALLS = 21
+MAX_RETRIES = 4
+# K3 is an "always-thinking" model — reasoning tokens are spent before the visible
+# answer, so max_tokens must leave room for both.
+MAX_TOKENS = 500
+
+
+def _extract_retry_delay(error, default=25):
+    match = re.search(r"after (\d+) seconds", str(error))
+    if match:
+        return float(match.group(1)) + 2
+    return default
 
 
 def extract_gt_answers(words, ner_tags):
@@ -54,9 +73,9 @@ def image_to_base64(pil_image):
     return b64
 
 
-def run_funsd_gpt4o_evaluation():
+def run_funsd_kimi_evaluation():
     print("=" * 60)
-    print("FUNSD EVALUATION - GPT-4o")
+    print(f"FUNSD EVALUATION - {MODEL}")
     print("=" * 60)
 
     ds = load_dataset("nielsr/funsd", split="test")
@@ -82,27 +101,37 @@ def run_funsd_gpt4o_evaluation():
         try:
             image_b64 = image_to_base64(image)
 
-            response = client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
+            response = None
+            for attempt in range(MAX_RETRIES):
+                try:
+                    response = client.chat.completions.create(
+                        model=MODEL,
+                        messages=[
                             {
-                                "type": "image_url",
-                                "image_url": {"url": f"data:image/png;base64,{image_b64}"}
-                            },
-                            {
-                                "type": "text",
-                                "text": f"List all the filled-in field values from this form, one per line. Only output the values, nothing else."
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "image_url",
+                                        "image_url": {"url": f"data:image/png;base64,{image_b64}"}
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": f"List all the filled-in field values from this form, one per line. Only output the values, nothing else."
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                ],
-                temperature=0
-            )
+                        ],
+                        max_tokens=MAX_TOKENS
+                    )
+                    break
+                except RateLimitError as e:
+                    if attempt == MAX_RETRIES - 1:
+                        raise
+                    delay = _extract_retry_delay(e)
+                    print(f"        Rate limited, retrying in {delay:.0f}s (attempt {attempt+1}/{MAX_RETRIES})...")
+                    time.sleep(delay)
 
-            prediction_text = response.choices[0].message.content.strip()
+            prediction_text = (response.choices[0].message.content or "").strip()
             predicted_values = [line.strip() for line in prediction_text.split("\n") if line.strip()]
 
             print(f"        Predicted: {predicted_values[:3]}...")
@@ -131,7 +160,7 @@ def run_funsd_gpt4o_evaluation():
             print(f"    ERROR: {e}")
             all_scores.append(0.0)
 
-        time.sleep(0.5)
+        time.sleep(SECONDS_BETWEEN_CALLS)
 
     avg_anls = sum(all_scores) / len(all_scores) if all_scores else 0
 
@@ -142,25 +171,26 @@ def run_funsd_gpt4o_evaluation():
             qwen_anls = json.load(f).get("anls")
 
     print(f"\n{'='*60}")
-    print(f"GPT-4o FUNSD ANLS: {avg_anls:.3f}  (n={len(all_scores)})")
+    print(f"{MODEL} FUNSD ANLS: {avg_anls:.3f}  (n={len(all_scores)})")
     if qwen_anls is not None:
         print(f"Qwen2-VL-max FUNSD ANLS: {qwen_anls:.3f} (from {qwen_results_path})")
-        print(f"Difference (GPT-4o - Qwen2-VL-max): {avg_anls - qwen_anls:+.3f}")
+        print(f"Difference ({MODEL} - Qwen2-VL-max): {avg_anls - qwen_anls:+.3f}")
     print(f"{'='*60}")
 
     os.makedirs("evaluation/results", exist_ok=True)
-    with open("evaluation/results/funsd_gpt4o_results.json", "w") as f:
+    with open("evaluation/results/funsd_kimi_results.json", "w") as f:
         json.dump({
             "dataset": "FUNSD",
+            "model": MODEL,
             "num_samples": len(all_scores),
-            "gpt4o_anls": round(avg_anls, 3),
+            "kimi_anls": round(avg_anls, 3),
             "qwen_vl_max_anls": qwen_anls,
             "per_doc": results
         }, f, indent=2)
 
-    print("Saved to evaluation/results/funsd_gpt4o_results.json")
+    print("Saved to evaluation/results/funsd_kimi_results.json")
     return avg_anls
 
 
 if __name__ == "__main__":
-    run_funsd_gpt4o_evaluation()
+    run_funsd_kimi_evaluation()

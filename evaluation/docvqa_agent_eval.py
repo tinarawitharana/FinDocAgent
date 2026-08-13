@@ -1,3 +1,7 @@
+"""Runs the full FinDocAgent LangGraph pipeline (not a direct model call) on the same
+DocVQA sample as docvqa_eval.py, to measure whether the retrieval/retry loop improves
+on the base-model reference point."""
+
 import os
 import sys
 import json

@@ -1,28 +1,31 @@
+"""Shared state passed between all LangGraph nodes in the FinDocAgent pipeline."""
+
 from typing import TypedDict, List, Optional
 
 class AgentState(TypedDict):
 
-    #document analyzing
+    # path to the input document (PDF or image)
     document_path: str
 
-    #quesion to answer
+    # question to answer, if in document-QA/RAG mode; unset in bank-statement mode
     question: str
 
-    #retriver finds
+    # retriever output: either rendered page-image paths (RAG mode) or the raw
+    # document_path passed through unchanged (bank-statement / image mode)
     retrieved_chunks: List[str]
 
-    #extractor pulls out
+    # extractor output in bank-statement mode: structured fields pulled from the document
     extracted_fields: dict
 
-    #agents answer
+    # extractor output in document-QA/RAG mode: the model's answer to `question`
     answer: str
 
-    #anamoly checker flags
+    # anomaly_checker output: list of anomaly dicts (math discrepancies, date ordering, ...)
     anomalies: List[str]
 
-    #final output
+    # explainer output: the final human-readable risk report
     risk_report: str
 
-    #control
+    # loop control
     iteration_count: int
     task_complete: bool

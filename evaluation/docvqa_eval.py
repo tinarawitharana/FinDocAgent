@@ -1,3 +1,6 @@
+"""Runs Qwen2-VL-max directly (single hosted-API call per question, no agent/RAG) on a
+DocVQA sample, as the base-model reference point for the agent/RAG comparisons."""
+
 import os
 import sys
 import base64

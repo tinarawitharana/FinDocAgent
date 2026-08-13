@@ -1,3 +1,7 @@
+"""Sanity check for the synthetic bank-statement test set: confirms the anomaly_checker's
+math/date features actually fire on the documents deliberately constructed to contain
+those errors (data/samples/synthetic/, labeled in ground_truth.json)."""
+
 import os
 import sys
 import json

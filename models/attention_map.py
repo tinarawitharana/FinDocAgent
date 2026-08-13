@@ -1,3 +1,8 @@
+"""Attention-map explainability for the RQ3 XAI analysis: runs a local Qwen2-VL-2B model
+(not the DashScope-hosted Qwen2-VL-max used elsewhere) so raw attention weights are
+accessible, then visualizes where the model looked when answering a document question.
+"""
+
 import os
 import torch
 import numpy as np
@@ -13,6 +18,7 @@ _model = None
 _processor = None
 
 def load_local_model():
+    """Lazily loads and caches the local Qwen2-VL-2B model/processor (module-level singleton)."""
     global _model, _processor
     if _model is not None:
         return _model, _processor
@@ -33,6 +39,12 @@ def load_local_model():
     return _model, _processor
 
 def generate_attention_map(pil_image, question, save_path=None):
+    """Answers `question` about `pil_image` and renders a 3-panel attention visualization
+    (input, heatmap, overlay). Optionally saves the figure to `save_path`.
+
+    Returns (answer, matplotlib_figure), or (answer, None) if no image tokens were found
+    in the generated sequence to build a heatmap from.
+    """
     model, processor = load_local_model()
 
     messages = [

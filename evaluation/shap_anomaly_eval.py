@@ -1,3 +1,7 @@
+"""RQ3 explainability: SHAP analysis over the anomaly_checker's two engineered features
+(math_feature, date_feature), using the cached extractions from
+extract_bank_statements_once.py, to show each feature's contribution to the anomaly score."""
+
 import os
 import sys
 import json

@@ -1,3 +1,6 @@
+"""Runs Qwen2-VL-max directly on a FUNSD (form understanding) sample, deriving QA pairs
+from the dataset's NER tags, as the base-model reference point for FUNSD comparisons."""
+
 import os
 import sys
 import json

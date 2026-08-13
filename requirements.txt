@@ -1,7 +1,28 @@
-langgraph>=0.2.0
-langchain>=0.2.0
-python-dotenv
-pdfplumber
-pdf2image
-chromadb
-sentence-transformers
+# Agent orchestration
+langgraph>=1.2.6
+
+# Document parsing (PDF text + page rasterization)
+pdfplumber>=0.11.10
+pdf2image>=1.17.0
+
+# Vector store / retrieval
+chromadb>=1.5.9
+sentence-transformers>=5.6.0
+rank-bm25>=0.2.2
+
+# Vision-language models and explainability
+torch>=2.9.1
+transformers>=5.12.1
+qwen-vl-utils>=0.0.14
+shap>=0.52.0
+openai>=2.43.0  # DashScope/Qwen and GPT-4o clients both use the OpenAI-compatible API
+
+# Evaluation, figures, synthetic data
+datasets>=5.0.0
+matplotlib>=3.11.0
+numpy>=2.4.3
+reportlab>=5.0.0
+Pillow>=12.2.0
+
+# Config
+python-dotenv>=1.2.2

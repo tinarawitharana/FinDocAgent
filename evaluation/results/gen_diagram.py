@@ -1,5 +1,8 @@
+"""Regenerates agent_flow.png, the LangGraph agent diagram used in the README/dissertation."""
+
+import os
 import sys
-sys.path.append("/home/jovyan/FinDocAgent/FinDocAgent")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from agent.graph import build_graph
 

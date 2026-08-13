@@ -1,3 +1,7 @@
+"""Runs the full FinDocAgent LangGraph pipeline (RAG page retrieval, not the oracle page)
+on the same SEC 10-K QA set as sec10k_eval.py, to measure retrieval quality's effect on
+answer accuracy."""
+
 import os
 import sys
 import json

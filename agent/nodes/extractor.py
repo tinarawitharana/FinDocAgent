@@ -1,3 +1,10 @@
+"""Extractor node: answers questions (RAG mode) or pulls structured fields (bank-statement mode).
+
+Both modes call Qwen2-VL-max, but with different prompts and inputs — question mode sends
+the retrieved page images with the user's question, bank-statement mode delegates to
+models.qwen.extract_fields_from_document to pull structured fields from the raw PDF.
+"""
+
 from agent.state import AgentState
 from models.qwen import extract_fields_from_document
 from openai import OpenAI
@@ -14,6 +21,7 @@ client = OpenAI(
 )
 
 def image_to_base64(image_path):
+    """Reads an image file and returns its base64-encoded contents."""
     with open(image_path, "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 

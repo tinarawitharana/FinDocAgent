@@ -1,23 +1,21 @@
-"""Runs GPT-4o on the same FUNSD sample as funsd_eval.py, mirroring docvqa_gpt4o_eval.py's
-approach for the commercial-model baseline comparison."""
-
+"""
+Runs Gemma 3 4B (google/gemma-3-4b-it) locally via HuggingFace transformers on
+the FUNSD test set, mirroring evaluation/docvqa_gemma_eval.py's local-loading
+approach (bf16 first, 4-bit fallback on OOM). See that file's module docstring
+for the VRAM-fit rationale.
+"""
 import os
 import sys
 import json
 import time
-import tempfile
-import base64
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import torch
 from datasets import load_dataset
-from openai import OpenAI
-from dotenv import load_dotenv
 from evaluation.metrics import anls_score
-
-load_dotenv(os.path.expanduser("~/.env"))
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+from evaluation.docvqa_gemma_eval import load_model, gemma_single_pass
+import evaluation.docvqa_gemma_eval as gemma_module
 
 
 def extract_gt_answers(words, ner_tags):
@@ -44,20 +42,35 @@ def extract_gt_answers(words, ner_tags):
     return answers
 
 
-def image_to_base64(pil_image):
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
-        pil_image.save(tmp.name, "PNG")
-        tmp_path = tmp.name
-    with open(tmp_path, "rb") as f:
-        b64 = base64.b64encode(f.read()).decode("utf-8")
-    os.unlink(tmp_path)
-    return b64
+def gemma_funsd_pass(image):
+    messages = [{
+        "role": "user",
+        "content": [
+            {"type": "image", "image": image},
+            {"type": "text", "text": "List all the filled-in field values from this form, one per line. Only output the values, nothing else."}
+        ]
+    }]
+
+    inputs = gemma_module._processor.apply_chat_template(
+        messages, add_generation_prompt=True,
+        tokenize=True, return_dict=True, return_tensors="pt"
+    ).to(gemma_module._model.device, dtype=torch.bfloat16 if gemma_module._load_mode == "bf16" else torch.float16)
+
+    input_len = inputs["input_ids"].shape[-1]
+
+    with torch.inference_mode():
+        output = gemma_module._model.generate(**inputs, max_new_tokens=200, do_sample=False)
+
+    generated = output[0][input_len:]
+    return gemma_module._processor.decode(generated, skip_special_tokens=True).strip()
 
 
-def run_funsd_gpt4o_evaluation():
+def run_funsd_gemma_evaluation():
     print("=" * 60)
-    print("FUNSD EVALUATION - GPT-4o")
+    print(f"FUNSD EVALUATION - {gemma_module.MODEL_ID} (local)")
     print("=" * 60)
+
+    load_model()
 
     ds = load_dataset("nielsr/funsd", split="test")
 
@@ -80,32 +93,13 @@ def run_funsd_gpt4o_evaluation():
         print(f"        GT answers: {gt_answers[:3]}...")
 
         try:
-            image_b64 = image_to_base64(image)
+            start = time.time()
+            prediction_text = gemma_funsd_pass(image)
+            elapsed = time.time() - start
 
-            response = client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "image_url",
-                                "image_url": {"url": f"data:image/png;base64,{image_b64}"}
-                            },
-                            {
-                                "type": "text",
-                                "text": f"List all the filled-in field values from this form, one per line. Only output the values, nothing else."
-                            }
-                        ]
-                    }
-                ],
-                temperature=0
-            )
-
-            prediction_text = response.choices[0].message.content.strip()
             predicted_values = [line.strip() for line in prediction_text.split("\n") if line.strip()]
 
-            print(f"        Predicted: {predicted_values[:3]}...")
+            print(f"        Predicted: {predicted_values[:3]}...  ({elapsed:.1f}s)")
 
             doc_scores = []
             for gt in gt_answers:
@@ -131,8 +125,6 @@ def run_funsd_gpt4o_evaluation():
             print(f"    ERROR: {e}")
             all_scores.append(0.0)
 
-        time.sleep(0.5)
-
     avg_anls = sum(all_scores) / len(all_scores) if all_scores else 0
 
     qwen_anls = None
@@ -142,25 +134,27 @@ def run_funsd_gpt4o_evaluation():
             qwen_anls = json.load(f).get("anls")
 
     print(f"\n{'='*60}")
-    print(f"GPT-4o FUNSD ANLS: {avg_anls:.3f}  (n={len(all_scores)})")
+    print(f"{gemma_module.MODEL_ID} FUNSD ANLS: {avg_anls:.3f}  (n={len(all_scores)})")
     if qwen_anls is not None:
         print(f"Qwen2-VL-max FUNSD ANLS: {qwen_anls:.3f} (from {qwen_results_path})")
-        print(f"Difference (GPT-4o - Qwen2-VL-max): {avg_anls - qwen_anls:+.3f}")
+        print(f"Difference ({gemma_module.MODEL_ID} - Qwen2-VL-max): {avg_anls - qwen_anls:+.3f}")
     print(f"{'='*60}")
 
     os.makedirs("evaluation/results", exist_ok=True)
-    with open("evaluation/results/funsd_gpt4o_results.json", "w") as f:
+    with open("evaluation/results/funsd_gemma_results.json", "w") as f:
         json.dump({
             "dataset": "FUNSD",
+            "model": gemma_module.MODEL_ID,
+            "load_mode": gemma_module._load_mode,
             "num_samples": len(all_scores),
-            "gpt4o_anls": round(avg_anls, 3),
+            "gemma_anls": round(avg_anls, 3),
             "qwen_vl_max_anls": qwen_anls,
             "per_doc": results
         }, f, indent=2)
 
-    print("Saved to evaluation/results/funsd_gpt4o_results.json")
+    print("Saved to evaluation/results/funsd_gemma_results.json")
     return avg_anls
 
 
 if __name__ == "__main__":
-    run_funsd_gpt4o_evaluation()
+    run_funsd_gemma_evaluation()

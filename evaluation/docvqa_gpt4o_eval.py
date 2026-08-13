@@ -1,3 +1,7 @@
+"""Runs GPT-4o on the same DocVQA sample as docvqa_eval.py, as the primary commercial-model
+baseline comparison point. See notes/phase13_gpt4o_baseline_comparison.md for the analysis
+this produced, and gpt4o_error_analysis.py for the follow-up error classification."""
+
 import os
 import sys
 import base64

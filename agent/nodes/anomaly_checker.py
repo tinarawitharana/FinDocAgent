@@ -1,7 +1,17 @@
+"""Anomaly checker node: rule-based checks over the extractor's structured fields.
+
+Two independent checks feed into the risk report: whether the stated total reconciles
+with opening balance + line items, and whether line-item dates are chronological.
+compute_anomaly_features/anomaly_score also back the SHAP explainability analysis in
+evaluation/shap_anomaly_eval.py, which is why the two feature signals are kept separate
+and normalized to [0, 1] rather than folded straight into a single detector.
+"""
+
 from agent.state import AgentState
 
 
 def _signed_amount(item):
+    """Returns a line item's amount signed by type: negative for debits, positive for credits."""
     amount = item.get("amount", 0)
     item_type = (item.get("type") or "").strip().lower()
     if item_type == "debit":
@@ -12,6 +22,12 @@ def _signed_amount(item):
 
 
 def compute_anomaly_features(fields):
+    """Derives normalized anomaly signals from extracted fields.
+
+    math_feature: how far the stated total is from opening_balance + sum(line items),
+    as a fraction of the stated total (capped at 1.0).
+    date_feature: fraction of adjacent line-item pairs that are out of chronological order.
+    """
     stated = fields.get("stated_total", 0)
     opening_balance = fields.get("opening_balance", 0)
     calculated = opening_balance + sum(_signed_amount(item) for item in fields.get("line_items", []))
@@ -33,6 +49,7 @@ def compute_anomaly_features(fields):
 
 
 def anomaly_score(features):
+    """Combines math and date anomaly features into a single risk score (equal weighting)."""
     return 0.5 * features["math_feature"] + 0.5 * features["date_feature"]
 
 
@@ -70,7 +87,6 @@ def anomaly_checker_node(state: AgentState) -> AgentState:
             print(f"[ANOMALY CHECKER] No anomalies detected. Dates are in chronological order.")
 
 
-    #dummy
     state['anomalies'] = anomalies
 
     return state

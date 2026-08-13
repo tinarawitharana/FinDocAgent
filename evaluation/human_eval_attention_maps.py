@@ -1,3 +1,8 @@
+"""RQ3 explainability: generates paired attention-map visualizations for SEC 10-K
+questions at both the RAG-retrieved page and the known-correct ("oracle") page, so a
+human rater can compare where the model actually looked in each case
+(see evaluation/human_eval_rater_instructions.md and human_eval_scoring_template.csv)."""
+
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -7,7 +12,8 @@ import matplotlib.pyplot as plt
 from pdf2image import convert_from_path
 from models.attention_map import generate_attention_map
 
-POPPLER_PATH = "/home/jovyan/.conda/pkgs/poppler-26.05.0-hfdef1ce_3/bin"
+# Override via the POPPLER_PATH env var if poppler isn't on your PATH.
+POPPLER_PATH = os.getenv("POPPLER_PATH")
 
 SEC10K_QUESTION_NUMBERS = [1, 2, 4, 5, 8, 14, 15, 17, 19, 22, 26, 28, 30, 36, 37]
 

@@ -1,4 +1,9 @@
+"""Shared scoring metrics used across all evaluation scripts: ANLS (Average Normalized
+Levenshtein Similarity, the standard DocVQA metric) and set-based F1."""
+
 def anls_score(prediction, ground_truth, threshold=0.5):
+    """Normalized edit-distance similarity in [0, 1]; scores below `threshold` are
+    clamped to 0, per the standard ANLS definition."""
 
     if not prediction or not ground_truth:
         return 0.0
@@ -21,8 +26,7 @@ def anls_score(prediction, ground_truth, threshold=0.5):
         return 0.0
 
 def levenshtein_distance(s1, s2):
-
-    #to calculate distance between two strings
+    """Standard dynamic-programming edit distance between two strings."""
     m, n = len(s1), len(s2)
     dp = [[0] * (n+1) for _ in range(m+1)]
 
@@ -47,6 +51,8 @@ def levenshtein_distance(s1, s2):
     return dp[m][n]
 
 def calculate_f1(predicted_items, ground_truth_items):
+    """Set-based F1 (case-insensitive exact match) between predicted and ground-truth items,
+    used for line-item extraction where order doesn't matter."""
 
     if not predicted_items and not ground_truth_items:
         return 1.0

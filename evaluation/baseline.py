@@ -1,3 +1,7 @@
+"""Early regex-vs-Qwen2-VL baseline comparison (phase 1/2), superseded by the larger
+DocVQA/FUNSD/SEC-10K evaluations elsewhere in this folder. Kept runnable for historical
+reference to the regex_avg_anls vs qwen_avg_anls result in evaluation/results/baseline_results.json.
+"""
 import sys
 import os
 import json

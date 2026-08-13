@@ -1,4 +1,10 @@
-import os 
+"""Qwen2-VL-max field extraction for financial documents (bank statements, invoices, KYC docs).
+
+Calls the DashScope-hosted Qwen2-VL-max model with a rendered page image and a fixed
+extraction prompt, returning structured JSON (totals, line items, balances).
+"""
+
+import os
 import base64
 import json
 from openai import OpenAI
@@ -7,7 +13,9 @@ from pdf2image import convert_from_path
 
 load_dotenv(os.path.expanduser("~/.env"))
 
-POPPLER_PATH = "/home/jovyan/.conda/pkgs/poppler-26.05.0-hfdef1ce_3/bin"
+# poppler is a system dependency for pdf2image. Override via the POPPLER_PATH env var
+# if it's not on your PATH (e.g. a conda-installed poppler); leave unset to use PATH.
+POPPLER_PATH = os.getenv("POPPLER_PATH")
 
 client = OpenAI(
     api_key=os.getenv("DASHSCOPE_API_KEY"),
@@ -16,8 +24,7 @@ client = OpenAI(
 )
 
 def pdf_page_to_base64(pdf_path, page_num=0, dpi=200):
-
-    #convert a pdf page to base64 encoded image
+    """Render one page of a PDF to a base64-encoded PNG for the vision API."""
     images = convert_from_path(
         pdf_path,
         dpi=dpi,
@@ -30,9 +37,11 @@ def pdf_page_to_base64(pdf_path, page_num=0, dpi=200):
         return base64.b64encode(f.read()).decode("utf-8")
 
 def extract_fields_from_document(pdf_path):
+    """Send the document's first page to Qwen2-VL-max and parse its JSON field extraction.
 
-    #uses Qwen2-VL to extract structures fields from a financial doc
-
+    Returns a dict with the extracted fields, or a fallback dict with the raw response
+    under "raw_response" if the model's output isn't valid JSON.
+    """
     print(f"[QWEN] Converting document to image..")
     image_b64 = pdf_page_to_base64(pdf_path, page_num=0)
 

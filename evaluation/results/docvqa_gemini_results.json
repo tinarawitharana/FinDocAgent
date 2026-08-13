@@ -1,0 +1,92 @@
+{
+  "dataset": "DocVQA (nielsr/docvqa_1200_examples)",
+  "model": "gemini-3.5-flash",
+  "num_samples": 8,
+  "gemini_anls": 0.875,
+  "qwen_vl_max_anls": 0.952,
+  "reference_layoutlmv3": 0.834,
+  "per_question_results": [
+    {
+      "id": 0,
+      "question": "what is the date mentioned in this letter?",
+      "ground_truth": [
+        "1/8/93"
+      ],
+      "prediction": "1/8/93",
+      "anls": 1.0,
+      "time_seconds": 1.56
+    },
+    {
+      "id": 1,
+      "question": "Who is in  cc in this letter?",
+      "ground_truth": [
+        "T.F. Riehl"
+      ],
+      "prediction": "T.F. Riehl",
+      "anls": 1.0,
+      "time_seconds": 1.56
+    },
+    {
+      "id": 2,
+      "question": "what is the subject of  this letter?",
+      "ground_truth": [
+        "Review of existing Brainstorming Ideas/483"
+      ],
+      "prediction": "Review of Existing Brainstorming Ideas/483",
+      "anls": 1.0,
+      "time_seconds": 3.03
+    },
+    {
+      "id": 3,
+      "question": "What is the number at the bottom of the page, in bold?",
+      "ground_truth": [
+        "499150498"
+      ],
+      "prediction": "499150498",
+      "anls": 1.0,
+      "time_seconds": 1.4
+    },
+    {
+      "id": 4,
+      "question": "How many points are there in modifications to readout instrumentation",
+      "ground_truth": [
+        "5.",
+        "5"
+      ],
+      "prediction": "5",
+      "anls": 1.0,
+      "time_seconds": 1.28
+    },
+    {
+      "id": 5,
+      "question": "what is the date in the letter",
+      "ground_truth": [
+        "June 11, 1990",
+        "June 11,1990"
+      ],
+      "prediction": "June 11, 1990",
+      "anls": 1.0,
+      "time_seconds": 1.41
+    },
+    {
+      "id": 6,
+      "question": "Who sent the letter?",
+      "ground_truth": [
+        "Ted Sanders"
+      ],
+      "prediction": "Ted Sanders",
+      "anls": 1.0,
+      "time_seconds": 1.33
+    },
+    {
+      "id": 7,
+      "question": "Which part of Virginia is this letter sent from",
+      "ground_truth": [
+        "Richmond"
+      ],
+      "prediction": "Richmond, Virginia",
+      "anls": 0.0,
+      "time_seconds": 1.66
+    }
+  ]
+}

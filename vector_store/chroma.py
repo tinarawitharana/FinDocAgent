@@ -1,14 +1,18 @@
+"""ChromaDB-backed hybrid retrieval: dense (sentence-embedding) + BM25 keyword search
+over chunked document text, fused via reciprocal rank fusion for the retriever node."""
+
 import chromadb
 from chromadb.utils import embedding_functions
 from rank_bm25 import BM25Okapi
 
 def get_chroma_client(persist_dir="data/chroma_db"):
-
+    """Opens (or creates) the on-disk ChromaDB collection store."""
     client = chromadb.PersistentClient(path=persist_dir)
 
     return client
 
 def chunk_text(text, chunk_size=250, overlap=50):
+    """Splits text into overlapping word-count chunks for embedding/indexing."""
     words = text.split()
     chunks = []
     start = 0
@@ -20,12 +24,15 @@ def chunk_text(text, chunk_size=250, overlap=50):
 
 
 def get_embedding_function():
+    """Dense embedding function used for both indexing and querying (must match)."""
     return embedding_functions.SentenceTransformerEmbeddingFunction(model_name="BAAI/bge-base-en-v1.5")
 
 def index_document(pages_data, document_name, client= None):
+    """Chunks each page's extracted text and (re-)indexes it into a ChromaDB collection.
 
-    #chunks the extracted page text and indexes it into the ChromaDB vector store
-
+    Drops any existing collection with the same name first, so re-indexing a document
+    is idempotent rather than appending duplicate chunks.
+    """
     if client is None:
         client = get_chroma_client()
 
@@ -67,8 +74,7 @@ def index_document(pages_data, document_name, client= None):
     return collection
 
 def search_document(collection, query, top_k=3):
-
-    #searches the ChromaDB vector store for the query and returns the top_k results
+    """Dense semantic search: embeds the query and returns the top_k nearest chunks."""
 
     instructed_query = f"Represent this sentence for searching relevant passages: {query}"
 
@@ -80,6 +86,11 @@ def search_document(collection, query, top_k=3):
     return results
 
 def bm25_search(collection, query, top_k=10):
+    """Sparse keyword search over the same collection's chunks, returning top_k page numbers.
+
+    Rebuilds the BM25 index from the full collection on every call rather than persisting
+    it, since collections here are small (single-document) and re-indexing is cheap.
+    """
     data = collection.get(include=["documents", "metadatas"])
     tokenized_corpus = [doc.lower().split() for doc in data["documents"]]
     bm25 = BM25Okapi(tokenized_corpus)
@@ -91,6 +102,7 @@ def bm25_search(collection, query, top_k=10):
     return [data["metadatas"][i]["page_number"] for i in ranked_indices]
 
 def reciprocal_rank_fusion(rank_lists, k=60):
+    """Merges multiple ranked page-number lists (dense + BM25) into one fused ranking."""
     scores = {}
     for ranked_pages in rank_lists:
         for rank, page in enumerate(ranked_pages):
@@ -102,9 +114,8 @@ if __name__ == "__main__":
 
     from document_parser.parser import extract_text_with_positions
 
-    #quick test
+    #quick manual smoke test
     test_pdf = "data/samples/bank_statement_clean_word.pdf"
-    from document_parser.parser import extract_text_with_positions
 
     print ("Extracting text with positions...")
     pages_data = extract_text_with_positions(test_pdf)

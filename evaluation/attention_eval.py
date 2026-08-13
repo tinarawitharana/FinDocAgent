@@ -1,3 +1,6 @@
+"""RQ3 explainability: generates and saves attention-map visualizations (via
+models/attention_map.py) for a handful of DocVQA examples using the local Qwen2-VL-2B model."""
+
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

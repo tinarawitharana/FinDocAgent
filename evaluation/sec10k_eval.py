@@ -1,3 +1,7 @@
+"""Runs Qwen2-VL-max on a hand-curated SEC 10-K QA set (data/sec10k_qa.json), sending the
+model the correct "oracle" page directly — the reference point that docvqa/sec10k agent
+evals compare their RAG-retrieved-page accuracy against."""
+
 import os
 import sys
 import json
@@ -14,7 +18,8 @@ from evaluation.metrics import anls_score
 
 load_dotenv(os.path.expanduser("~/.env"))
 
-POPPLER_PATH = "/home/jovyan/.conda/pkgs/poppler-26.05.0-hfdef1ce_3/bin"
+# Override via the POPPLER_PATH env var if poppler isn't on your PATH.
+POPPLER_PATH = os.getenv("POPPLER_PATH")
 
 client = OpenAI(
     api_key=os.getenv("DASHSCOPE_API_KEY"),
