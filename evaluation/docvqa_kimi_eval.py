@@ -1,5 +1,5 @@
 """Runs Kimi (Moonshot AI) on a DocVQA sample, as one of the multi-model baseline
-comparison points alongside GPT-4o/Gemini/Gemma/InternVL/SmolVLM."""
+comparison points alongside GPT-4o/Gemini/Gemma/SmolVLM."""
 
 import os
 import re

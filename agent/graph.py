@@ -56,7 +56,19 @@ def build_graph():
 
     #add edges
     graph.add_edge("retriever", "extractor")
-    graph.add_conditional_edges("extractor", should_continue)
+    # explicit path_map so LangGraph's graph visualizer (see evaluation/results/gen_diagram.py)
+    # can draw every branch should_continue can take, not just the one it can infer statically
+    graph.add_conditional_edges(
+        "extractor",
+        should_continue,
+        {
+            "retriever": "retriever",
+            "extractor": "extractor",
+            "anomaly_checker": "anomaly_checker",
+            "explainer": "explainer",
+            END: END,
+        },
+    )
     graph.add_edge("anomaly_checker", "explainer")
     graph.add_edge("explainer", END)
 

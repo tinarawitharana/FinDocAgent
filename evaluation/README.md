@@ -1,7 +1,7 @@
 # Evaluation scripts
 
 This folder answers three research questions with a consistent pattern: run a model
-(or the full agent) on a benchmark, score it with `metrics.py`, and write results to
+or the full agent on a benchmark, score it with `metrics.py`, and write results to
 `evaluation/results/`.
 
 ## Naming pattern
@@ -16,8 +16,8 @@ the model used throughout the rest of the project (via DashScope).
 | SEC 10-K (oracle page) | `sec10k_eval.py` | `sec10k_agent_eval.py` (RAG-retrieved page) |
 | Bank statements (anomaly detection) | — | `bank_statement_agent_eval.py` |
 
-The "direct model call" scripts give the model the correct page directly (or, for
-DocVQA/FUNSD, the dataset's own image) — they're the reference point that the agent
+The "direct model call" scripts give the model the correct page directly or, for
+DocVQA/FUNSD, the dataset's own image as they're the reference point that the agent
 evals compare RAG-retrieval quality against.
 
 ## Multi-model baseline comparison
@@ -31,31 +31,26 @@ models, to put Qwen2-VL-max's numbers in context:
 | Gemini 3.5 Flash | `_gemini_eval.py` | Hosted API (Google) — capped by free-tier daily quota, see module docstring |
 | Kimi (Moonshot AI) | `_kimi_eval.py` | Hosted API |
 | Gemma 3 4B | `_gemma_eval.py` | Local HF model, bf16 with 4-bit fallback on OOM |
-| InternVL3.5-8B-HF | `_internvl_eval.py` | Local HF model |
 | SmolVLM2-2.2B-Instruct | `_smolvlm_eval.py` | Local HF model |
-
-`gpt4o_error_analysis.py` follows up on the GPT-4o results, classifying low-ANLS answers
-as genuine misreads vs. correct-but-verbose answers the ANLS metric penalizes unfairly.
 
 Local-model scripts need the corresponding weights downloaded and a GPU; see each file's
 module docstring for VRAM/disk tradeoffs hit while picking these particular checkpoints.
 
 ## Naive text-only baseline (RQ2)
 
-To answer "does multimodal visual encoding beat naive text extraction," three scripts
+To answer "does multimodal visual encoding beat naive text extraction," two scripts
 compare a regex/keyword-matching baseline (no VLM, no vision, no API call) against the
 Qwen2-VL-max numbers above, all scored with the same `anls_score`:
 
 | Domain | Script | Compares against |
 |---|---|---|
-| Bank statements (2 hand-crafted docs) | `baseline.py` | `models/qwen.py`'s field extraction |
 | DocVQA (same 50-sample slice) | `docvqa_baseline_eval.py` | `docvqa_eval.py` |
 | FUNSD (same 50-doc slice) | `funsd_baseline_eval.py` | `funsd_eval.py` |
 
 `docvqa_baseline_eval.py` and `funsd_baseline_eval.py` share their extraction logic in
 `regex_utils.py`: keyword-overlap window search (nudged toward a date/number regex match
 when the question implies that answer type) for DocVQA, and a "label ending in `:` →
-next 1-3 words are its value" heuristic for FUNSD — both operating on the datasets' own
+next 1-3 words are its value" heuristic for FUNSD, both operating on the datasets' own
 OCR `words` field, so no separate OCR step is needed. Being free of any API cost, these
 are safe to run directly rather than needing to be handed off.
 

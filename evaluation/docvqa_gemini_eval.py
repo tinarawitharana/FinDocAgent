@@ -1,6 +1,6 @@
 """Runs Gemini 3.5 Flash (via Google's OpenAI-compatible endpoint) on a small DocVQA
 sample, as one of the multi-model baseline comparison points alongside GPT-4o/Kimi/
-Gemma/InternVL/SmolVLM. Sample size is capped by Gemini's free-tier daily request limit."""
+Gemma/SmolVLM. Sample size is capped by Gemini's free-tier daily request limit."""
 
 import os
 import re
